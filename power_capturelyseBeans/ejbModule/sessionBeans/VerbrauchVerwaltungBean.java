@@ -36,8 +36,9 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Verbrauch> getVerbraeuche(int id_nutzer, int id_energietyp) {
-	List<Verbrauch> resultList = em.createQuery("SELECT * from tb_verbrauch where id_nutzer = " + id_nutzer + "and id_energietyp = " + id_energietyp).getResultList();
+    public List<Verbrauch> getVerbraeuche(int id_adresse, int id_energietyp) {
+	List<Verbrauch> resultList = em.createQuery("SELECT v from Verbrauch where v.adresse.id_adresse = " + id_adresse + "and v.engergietyp.id_engergietyp = " + id_energietyp).getResultList();
+	
 	logger.debug("Anzahl der gefundenen Verbräuche: " + resultList.size());
 	return resultList;
     }

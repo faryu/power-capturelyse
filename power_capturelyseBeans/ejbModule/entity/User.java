@@ -21,11 +21,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name="tb_user")
 //@SecondaryTable(name="tb_adresse")
-//@NamedQueries({
-//    @NamedQuery(name="User.findById", query="SELECT user FROM User WHERE id_user = :id_user"),
-//    @NamedQuery(name="User.findByName", query="SELECT user FROM User WHERE username = :name")
-//    
-//})
 
 public class User implements Serializable{
 

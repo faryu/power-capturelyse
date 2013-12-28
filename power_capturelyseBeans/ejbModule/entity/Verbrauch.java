@@ -28,35 +28,33 @@ public class Verbrauch implements Serializable{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id_verbrauch;
+    @Column(name="id_adresse", nullable=false, columnDefinition="INTEGER(11)")    
+    @JoinColumn(name="id_adresse", referencedColumnName="id_adresse")		
+    private Adresse adresse;
+    @ManyToOne
+    @JoinColumn(name="id_energietyp", referencedColumnName="id_energietyp", nullable=false, columnDefinition="INTEGER(11)")	
+    private Energietyp engergietyp;
     @Column(nullable=false, precision=14, scale=2)
     private BigDecimal zaehlerstand;    
     @Column(nullable=false)
     private Timestamp datum;           
-    @Column(name="id_adresse", nullable=false, columnDefinition="INTEGER(11)")    
-    @JoinColumn(name="id_adresse", referencedColumnName="id_adresse")		
-    private Adresse adresse;
     
-    @ManyToOne
-    @JoinColumn(name="id_energietyp", referencedColumnName="id_energietyp", nullable=false, columnDefinition="INTEGER(11)")	
-    private Energietyp engergietyp;
-    
-        
+       
     public Verbrauch(){
     	
     }
     
-    public Verbrauch(int id_verbrauch, BigDecimal zaehlerstand, Timestamp datum, Energietyp energietyp){
-	this.id_verbrauch = id_verbrauch;
+    public Verbrauch(Adresse adresse, BigDecimal zaehlerstand, Timestamp datum, Energietyp energietyp){
+	this.adresse = adresse;
 	this.datum = datum;
 	this.zaehlerstand = zaehlerstand;
 	this.engergietyp = energietyp;
 	
     }
     
-    public Verbrauch(BigDecimal zaehlerstand, Timestamp datum, Energietyp energietyp){	
+    public Verbrauch(BigDecimal zaehlerstand, Timestamp datum){		
 	this.datum = datum;
-	this.zaehlerstand = zaehlerstand;
-	this.engergietyp = energietyp;
+	this.zaehlerstand = zaehlerstand;	
     }
     
     public int getId_verbrauch() {
@@ -65,6 +63,22 @@ public class Verbrauch implements Serializable{
 
     public void setId_verbrauch(int id_verbrauch) {
         this.id_verbrauch = id_verbrauch;
+    }
+    
+    public Adresse getAadresse() {
+        return adresse;
+    }
+
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
+    }
+    
+    public Energietyp getEngergietyp() {
+        return engergietyp;
+    }
+
+    public void setEngergietyp(Energietyp engergietyp) {
+        this.engergietyp = engergietyp;
     }
     
     public BigDecimal getZaehlerstand() {
@@ -84,21 +98,9 @@ public class Verbrauch implements Serializable{
         this.datum = datum;
     }
     
-    public Adresse getAadresse() {
-        return adresse;
-    }
-
-    public void setAdresse(Adresse adresse) {
-        this.adresse = adresse;
-    }
     
-    public Energietyp getEngergietyp() {
-        return engergietyp;
-    }
-
-    public void setEngergietyp(Energietyp engergietyp) {
-        this.engergietyp = engergietyp;
-    }
+    
+    
 
 
 
