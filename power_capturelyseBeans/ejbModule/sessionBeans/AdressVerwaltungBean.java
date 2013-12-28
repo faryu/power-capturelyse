@@ -7,7 +7,7 @@ import javax.persistence.PersistenceContext;
 import org.jboss.logging.Logger;
 
 import entity.Adresse;
-import exceptions.AdressException;
+
 import interfaces.AdressVerwaltungInterface;
 
 
