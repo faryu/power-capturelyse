@@ -25,9 +25,14 @@ import java.awt.event.ActionEvent;
 import java.awt.Dimension;
 
 
-public class Client extends JFrame implements ActionListener {
+public class AppClient extends JFrame implements ActionListener {
 	
-    @EJB
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@EJB
     private static UserVerwaltungInterface userverwaltung;
     
     @EJB
@@ -56,7 +61,7 @@ public class Client extends JFrame implements ActionListener {
     public JButton btnUpdate;
     
     
-    public Client(){
+    public AppClient(){
     	super("Verbrauchsvergleich");
     	this.setSize(550,400);
     	this.getContentPane().setLayout(null);
@@ -91,7 +96,7 @@ public class Client extends JFrame implements ActionListener {
     	txtVerbrauch = new JTextField();
     	txtVerbrauch.setBounds(180,220,100,20);
     	
-    	btnAdd = new JButton("Hinzufügen");
+    	btnAdd = new JButton("Hinzuf�gen");
     	btnAdd.setBounds(10,250,100,40);
     	btnAdd.addActionListener(this);
     	btnUpdate = new JButton("Update");
@@ -123,7 +128,7 @@ public class Client extends JFrame implements ActionListener {
     }
     
 	public static void main (String[]args) throws NamingException{
-	    	new Client();
+	    	new AppClient();
 	    	
 	    	ServiceLocator locator = new ServiceLocator();
 	    	userverwaltung = (UserVerwaltungInterface)locator.getStateless("", "power_capturelyseBeans", "UserVerwaltungBean", UserVerwaltungInterface.class);
@@ -174,7 +179,7 @@ public class Client extends JFrame implements ActionListener {
 				int id_user = user.getId_user();
 		    	System.out.println(userverwaltung.findUser(id_user));
 				
-				//Diese Exception wird auf jeden Fall ausgelöst, keine Ahnung, warum!?
+				//Diese Exception wird auf jeden Fall ausgeloest, keine Ahnung, warum!?
 			}catch(Exception ex){
 				JOptionPane.showMessageDialog(this,"Remote Exception !!");
 				ex.printStackTrace();

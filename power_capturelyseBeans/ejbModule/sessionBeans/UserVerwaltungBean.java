@@ -8,6 +8,7 @@ import interfaces.UserVerwaltungInterface;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.jboss.logging.Logger;
 
@@ -59,7 +60,7 @@ public class UserVerwaltungBean implements UserVerwaltungInterface{
     
     @SuppressWarnings("unchecked")
     @Override
-    public List<Object[]> findUserAdresse(int id_user) {
+    public List<Object[]> findUserAdresse(int id_user) {   	
 	return em.createQuery("SELECT a.ort, a.strasse, a.plz from Adresse a where a.user.id_user = " + id_user).getResultList();
 	
     }

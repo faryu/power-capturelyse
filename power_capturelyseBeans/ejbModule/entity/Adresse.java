@@ -12,9 +12,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+@NamedQuery(name="findUserAdress", query="select a from Adresse a where a.user.id_user = ?1")
+		
+	
 
 @Entity
 @Table(name="tb_adresse")

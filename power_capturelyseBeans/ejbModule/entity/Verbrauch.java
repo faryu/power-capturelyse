@@ -28,12 +28,15 @@ public class Verbrauch implements Serializable{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id_verbrauch;
-    @Column(name="id_adresse", nullable=false, columnDefinition="INTEGER(11)")    
-    @JoinColumn(name="id_adresse", referencedColumnName="id_adresse")		
+    
+    @ManyToOne    
+    @JoinColumn(name="id_adresse", referencedColumnName="id_adresse", nullable=false, columnDefinition="INTEGER(11)")		
     private Adresse adresse;
+    
     @ManyToOne
     @JoinColumn(name="id_energietyp", referencedColumnName="id_energietyp", nullable=false, columnDefinition="INTEGER(11)")	
-    private Energietyp engergietyp;
+    private Energietyp energietyp;
+    
     @Column(nullable=false, precision=14, scale=2)
     private BigDecimal zaehlerstand;    
     @Column(nullable=false)
@@ -48,7 +51,7 @@ public class Verbrauch implements Serializable{
 	this.adresse = adresse;
 	this.datum = datum;
 	this.zaehlerstand = zaehlerstand;
-	this.engergietyp = energietyp;
+	this.energietyp = energietyp;
 	
     }
     
@@ -73,12 +76,12 @@ public class Verbrauch implements Serializable{
         this.adresse = adresse;
     }
     
-    public Energietyp getEngergietyp() {
-        return engergietyp;
+    public Energietyp getEnergietyp() {
+        return energietyp;
     }
 
-    public void setEngergietyp(Energietyp engergietyp) {
-        this.engergietyp = engergietyp;
+    public void setEnergietyp(Energietyp energietyp) {
+        this.energietyp = energietyp;
     }
     
     public BigDecimal getZaehlerstand() {

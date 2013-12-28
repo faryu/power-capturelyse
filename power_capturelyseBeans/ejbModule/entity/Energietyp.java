@@ -31,7 +31,7 @@ public class Energietyp implements Serializable{
     @Column(name="einheit",nullable=false, length=45)
     private String einheit;
     
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "engergietyp")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "energietyp")
     private Set<Verbrauch> verbrauch;
     
     
