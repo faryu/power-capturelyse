@@ -38,8 +38,8 @@ public class SimpleClient {
     	
 //    	user = userverwaltung.createUser(user,adresse);
 //    	adresse = userverwaltung.findAdresse(1);
-    	printList(userverwaltung.findUserAdresse(1));
-    	printList(verbrauchsverwaltung.getVerbraeuche(1));
+    	OutputHelper.output(userverwaltung.findUserAdresse(1));   	
+    	OutputHelper.output(verbrauchsverwaltung.getVerbraeuche(1));
 //    	int id_user = user.getId_user();
 //    	System.out.println(userverwaltung.findUser(id_user));
     		    	
@@ -48,17 +48,5 @@ public class SimpleClient {
 
 	}
 	
-	@SuppressWarnings("rawtypes")
-	public static void printList(List list) {
-	        for (Object elem: list) {
-	            if (elem.getClass().isArray()) {
-	                for (Object arrElem: (Object[])elem)
-	                    System.out.print(arrElem + " ");
-	                System.out.println();
-	            }
-	            else
-	                System.out.println(elem);
-	        }
-	    }
 
 }

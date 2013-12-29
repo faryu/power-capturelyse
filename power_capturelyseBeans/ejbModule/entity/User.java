@@ -1,7 +1,9 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -42,10 +44,10 @@ public class User implements Serializable{
     
     //Adresse
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
-    private List<Adresse> adresse;
+    private Set<Adresse> adresse;
            
     public User(){
-    	
+    	adresse = new HashSet<Adresse>();
     }
     
     public User(int id_user, String username, String uservname, String password){
@@ -101,11 +103,11 @@ public class User implements Serializable{
     }
     
        
-    public List<Adresse> getAdresse(){
+    public Set<Adresse> getAdresse(){
 	return adresse;
     }
     
-    public void setAdresse(List<Adresse> adresse){
+    public void setAdresse(Set<Adresse> adresse){
 	this.adresse = adresse;
     }
 

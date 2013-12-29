@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,12 +13,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
-@NamedQuery(name="findUserAdress", query="select a from Adresse a where a.user.id_user = ?1")
+
 		
 	
 
@@ -46,10 +46,12 @@ public class Adresse implements Serializable{
 	private User user;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "adresse")
+	@OrderBy("energietyp, datum")
 	private Set<Verbrauch> verbrauch;
 
 
 	public Adresse(){
+		verbrauch = new HashSet<Verbrauch>();
 		
 	}
 	
