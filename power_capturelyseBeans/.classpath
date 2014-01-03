@@ -8,8 +8,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Steffi Gouders/Programme/jboss-as-7.1.1.Final/bin/client/jboss-client.jar"/>
-	<classpathentry kind="lib" path="forms-1.3.0.jar" sourcepath="forms-1.3.0-src.zip"/>
-	<classpathentry kind="lib" path="C:/Users/Steffi Gouders/Programme/jdatechooser_bin_doc_1_1_1/lib/DateChooser.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Stefanie/Programme/jboss-as-7.1.1.Final/bin/client/jboss-client.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
