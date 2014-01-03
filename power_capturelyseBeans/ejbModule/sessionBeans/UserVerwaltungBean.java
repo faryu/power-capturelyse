@@ -46,17 +46,6 @@ public class UserVerwaltungBean implements UserVerwaltungInterface{
 	em.merge(user);	
     }
 
-//    @SuppressWarnings("unchecked")
-//    @Override
-//    public List<String> findUserAdresse(int id_user) {
-//	List<Adresse> adresse = em.createQuery("SELECT a from Adresse a where a.user.id_user = " + id_user).getResultList();
-//	List<String> result = new ArrayList<String>();
-//	for(Adresse a: adresse ){
-//	    result.add(a.getOrt());	    
-//	    result.add(a.getStrasse());
-//	}
-//	return result;
-//    }
     
     @SuppressWarnings("unchecked")
     @Override

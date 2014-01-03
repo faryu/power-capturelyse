@@ -9,5 +9,17 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="jars/jboss-client.jar"/>
+	<classpathentry kind="lib" path="jars/jersey/lib/asm-3.1.jar"/>
+	<classpathentry kind="lib" path="jars/jersey/lib/jackson-core-asl-1.9.2.jar"/>
+	<classpathentry kind="lib" path="jars/jersey/lib/jackson-jaxrs-1.9.2.jar"/>
+	<classpathentry kind="lib" path="jars/jersey/lib/jackson-mapper-asl-1.9.2.jar"/>
+	<classpathentry kind="lib" path="jars/jersey/lib/jackson-xc-1.9.2.jar"/>
+	<classpathentry kind="lib" path="jars/jersey/lib/jersey-client-1.12.jar"/>
+	<classpathentry kind="lib" path="jars/jersey/lib/jersey-core-1.12.jar"/>
+	<classpathentry kind="lib" path="jars/jersey/lib/jersey-json-1.12.jar"/>
+	<classpathentry kind="lib" path="jars/jersey/lib/jersey-server-1.12.jar"/>
+	<classpathentry kind="lib" path="jars/jersey/lib/jersey-servlet-1.12.jar"/>
+	<classpathentry kind="lib" path="jars/jersey/lib/jettison-1.1.jar"/>
+	<classpathentry kind="lib" path="jars/jersey/lib/jsr311-api-1.1.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
