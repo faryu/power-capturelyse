@@ -29,12 +29,12 @@ public class SimpleClient {
     	userverwaltung = (UserVerwaltungInterface)locator.getStateless("", "power_capturelyseBeans", "UserVerwaltungBean", UserVerwaltungInterface.class);
     	ServiceLocator locator2 = new ServiceLocator();
     	verbrauchsverwaltung = (VerbrauchVerwaltungInterface)locator2.getStateless("", "power_capturelyseBeans", "VerbrauchVerwaltungBean", VerbrauchVerwaltungInterface.class);
-//    	User user = new User();
-//    	Adresse adresse = new Adresse();
-//    	Adresse adresse = new Adresse("Schwanenstr. 70a", 46399, "Bocholt", user);
-//    	Verbrauch verbrauch = new Verbrauch();
+    	User user = new User("Omar", "Hany", "h1411893");
+    	//Adresse adresse = new Adresse();
+    	Adresse adresse = new Adresse("Vardingholter Str. 15", 46414, "Rhede", user);
+    	//Verbrauch verbrauch = new Verbrauch();
     	
-//    	user = userverwaltung.createUser(user,adresse);
+    	user = userverwaltung.createUser(user,adresse);
 //    	adresse = userverwaltung.findAdresse(1);
     	OutputHelper.output(userverwaltung.findUserAdresse(1));   	
 //    	OutputHelper.output(verbrauchsverwaltung.getVerbraeuche(1));
