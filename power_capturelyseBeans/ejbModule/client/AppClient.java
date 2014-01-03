@@ -178,7 +178,7 @@ public class AppClient extends JFrame implements ActionListener {
 //				user = userverwaltung.createUser(user, adresse);
 //				int id_user = user.getId_user();
 //		    	System.out.println(userverwaltung.findUser(id_user));
-		    	Test.main(null);
+		    	
 				
 				//Diese Exception wird auf jeden Fall ausgeloest, keine Ahnung, warum!?
 			}catch(Exception ex){
