@@ -1,7 +1,5 @@
 package client;
 
-import java.util.List;
-
 import javax.ejb.EJB;
 import javax.naming.NamingException;
 
@@ -39,7 +37,7 @@ public class SimpleClient {
 //    	user = userverwaltung.createUser(user,adresse);
 //    	adresse = userverwaltung.findAdresse(1);
     	OutputHelper.output(userverwaltung.findUserAdresse(1));   	
-    	OutputHelper.output(verbrauchsverwaltung.getVerbraeuche(1));
+//    	OutputHelper.output(verbrauchsverwaltung.getVerbraeuche(1));
 //    	int id_user = user.getId_user();
 //    	System.out.println(userverwaltung.findUser(id_user));
     		    	

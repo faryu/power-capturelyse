@@ -12,6 +12,7 @@ public interface VerbrauchVerwaltungInterface {
     
     public Verbrauch createVerbrauch(Verbrauch verbrauch);
     public void updateVerbrauch(Verbrauch verbrauch);
+    public void deleteVerbrauch(Verbrauch verbrauch);
     public List<Verbrauch> getVerbraeuche(int id_adresse);
     public List<Verbrauch> getVerbraeucheAuswahl(int id_adresse, int id_energietyp, Date datumVon, Date datumBis);
     

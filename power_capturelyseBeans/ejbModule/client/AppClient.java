@@ -172,12 +172,13 @@ public class AppClient extends JFrame implements ActionListener {
 				String password = pwPassword.getText();
 				String strasse = txtStrasse.getText();
 				String ort = txtOrt.getText();
-				Integer plz = Integer.parseInt(txtPlz.getText());
-				User user = new User(nachname, vorname, password);
-				Adresse adresse = new Adresse(strasse, plz, ort, user);
-				user = userverwaltung.createUser(user, adresse);
-				int id_user = user.getId_user();
-		    	System.out.println(userverwaltung.findUser(id_user));
+//				Integer plz = Integer.parseInt(txtPlz.getText());
+//				User user = new User(nachname, vorname, password);
+//				Adresse adresse = new Adresse(strasse, plz, ort, user);
+//				user = userverwaltung.createUser(user, adresse);
+//				int id_user = user.getId_user();
+//		    	System.out.println(userverwaltung.findUser(id_user));
+		    	Test.main(null);
 				
 				//Diese Exception wird auf jeden Fall ausgeloest, keine Ahnung, warum!?
 			}catch(Exception ex){

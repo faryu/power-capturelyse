@@ -33,6 +33,11 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 	em.merge(verbrauch);
 	
     }
+    
+    @Override
+	public void deleteVerbrauch(Verbrauch verbrauch) {
+		em.remove(verbrauch);		
+	}
 
     @SuppressWarnings("unchecked")
     @Override
@@ -60,5 +65,7 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 		logger.info("Anzahl der gefundenen Verbräuche: " + resultList.size());
 		return resultList;
 	}
+
+	
 
 }
