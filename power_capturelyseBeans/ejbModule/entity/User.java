@@ -39,6 +39,8 @@ public class User implements Serializable{
     private String username;
     @Column(name="uservname",nullable=false, length=45)
     private String uservname;
+    @Column(name="loginname", nullable=false, length=45)
+    private String loginname;
     @Column(name="password",nullable=false, length=45)
     private String password;
     
@@ -50,17 +52,19 @@ public class User implements Serializable{
     	adresse = new HashSet<Adresse>();
     }
     
-    public User(int id_user, String username, String uservname, String password){
+    public User(int id_user, String username, String uservname, String loginname,String password){
 	this.id_user = id_user;
 	this.username = username;
 	this.uservname = uservname;
+	this.loginname = loginname;
 	this.password = password;
 	
     }
     
-    public User(String username, String uservname, String password){	
+    public User(String username, String uservname, String loginname,String password){	
 	this.username = username;
 	this.uservname = uservname;
+	this.loginname = loginname;
 	this.password = password;
 	
     }
@@ -74,7 +78,15 @@ public class User implements Serializable{
     }
     
     
-    public String getUsername() {
+    public String getLoginname() {
+		return loginname;
+	}
+
+	public void setLoginname(String loginname) {
+		this.loginname = loginname;
+	}
+
+	public String getUsername() {
         return username;
     }
 
