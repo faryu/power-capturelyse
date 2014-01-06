@@ -10,7 +10,8 @@ import entity.User;
 @Remote
 public interface UserVerwaltungInterface {
     
-    public User createUser(User user, Adresse adresse);
+    public void createUser(User user);
+    boolean exists(String uname);
     public User findUser(int id);
     public void updateUser(User user);
 //    public List<String> findUserAdresse(int id_user);
