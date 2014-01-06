@@ -1,4 +1,3 @@
-<%@page import="de.whs.mwa.pcl.rs.AddressResource"%>
 <%@page import="javax.enterprise.inject.Model"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
