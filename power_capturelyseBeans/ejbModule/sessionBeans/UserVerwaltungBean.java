@@ -73,8 +73,14 @@ public class UserVerwaltungBean implements UserVerwaltungInterface{
 
 	@Override
 	public String getPasswort(String uname) {
-		// TODO Auto-generated method stub
+		// Zum Usernamen HASH string aus der DB
 		return "f01c206105c4d0d7b3128fd9f5a5bee6";
+	}
+
+	@Override
+	public User findUserLoginName(String unname) {
+		// TODO Zum Loginnamen User Object
+		return null;
 	} 
 
 }

@@ -32,8 +32,7 @@ public class SessionBean implements SessionRemoteInterface {
 	        {  System.out.println("Das Passwort lautet: " + password);
 	        	
 	        	hash = Helper.md5Java(password);
-	        	       
-	          
+	        	       	          
 	           System.out.println("Das MD5 Hash lautet: " + hash);
 	        	
 	        } 
@@ -46,7 +45,7 @@ public class SessionBean implements SessionRemoteInterface {
 			{
 				System.out.println("Das eigebene Passwort ist korrekt!");
 				this.user = loginname;
-				return true;				
+				return true;			
 			}	
 			else
 			{
