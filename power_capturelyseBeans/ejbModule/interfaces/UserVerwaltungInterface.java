@@ -18,6 +18,6 @@ public interface UserVerwaltungInterface {
     public List<Object []> findUserAdresse(int id_user);
     public Adresse findAdresse(int id);
     
-    public String getPasswort(String uname);
-    public User findUserLoginName(String unname);
+
+    public User findUserLoginName(String uname, String password);
 }
