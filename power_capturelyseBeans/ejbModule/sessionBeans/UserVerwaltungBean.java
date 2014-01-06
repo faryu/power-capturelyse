@@ -28,6 +28,17 @@ public class UserVerwaltungBean implements UserVerwaltungInterface{
 	em.persist(adresse);
 	return user;
     }
+    
+    @Override
+	public void createUser(User user) {
+		em.persist(user);
+	}
+
+	@Override
+	public boolean exists(String uname) {
+		// TODO Auto-generated method stub
+		return false;
+	} 
 
     @Override
     public User findUser(int id) {
@@ -54,13 +65,6 @@ public class UserVerwaltungBean implements UserVerwaltungInterface{
     query.setParameter("id_user", id_user);
 	return query.getResultList();
 	
-    }
-    
-    
-    
-    
-
-    
-    
+    } 
 
 }
