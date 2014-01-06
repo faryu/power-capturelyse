@@ -1,5 +1,6 @@
 package de.whs.mwa.pcl.rs;
 
+import helper.Helper;
 import interfaces.AdressVerwaltungInterface;
 import interfaces.UserVerwaltungInterface;
 import interfaces.VerbrauchVerwaltungInterface;
@@ -57,7 +58,7 @@ public class UserResource {
 			user.addError("password", "Passwort muss mindestens 4 Zeichen lang sein!");
 		if(user.errors == null)
 		{
-			userverwaltung.createUser(new entity.User(user.fname, user.name, user.uname, user.password));
+			userverwaltung.createUser(new entity.User(user.fname, user.name, user.uname, Helper.md5Java(user.password)));
 			throw new RedirectException("/user/login/" + user.uname);
 		}
 		return user;
@@ -87,7 +88,11 @@ public class UserResource {
 	{
 		if(!userverwaltung.exists(user.uname))
 			user.addError("uname", "User existiert nicht");
-		
+		if(user.errors == null)
+		{
+			// User login hinzufügen
+			
+		}
 		return user;
 	}
 }
