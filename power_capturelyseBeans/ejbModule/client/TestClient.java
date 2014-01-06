@@ -18,11 +18,7 @@ public class TestClient {
 public	static	void	main(String[]	args)	{	
 	
 	
-
-	
 	SessionRemoteInterface	remote	=	doLookup();	
-	
-	
 	
 	System.out.println("Bitte geben Sie einen Usernamen ein.");
 	String user = "wille";
@@ -39,16 +35,10 @@ public	static	void	main(String[]	args)	{
 	{
 		System.out.println("Sie haben sich erfolgreich angemeldet");
 		
-		System.out.println(remote.whoIam());
-		
-		
+		System.out.println(remote.whoIam());		
 	}
 	
-	
-
-
 }	
-
 
 private	static	SessionRemoteInterface	doLookup()	{	
 	Context	context	=	null;	
