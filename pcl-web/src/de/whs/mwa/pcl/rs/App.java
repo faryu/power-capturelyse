@@ -16,7 +16,7 @@ public class App extends Application {
 		classes = new HashSet<Class<?>>();
 		
 		singletons.add(new Test());
-		singletons.add(new UserResource());
+		classes.add(UserResource.class);
 		
 		classes.addAll(HtmleasyProviders.getClasses());
 	}
