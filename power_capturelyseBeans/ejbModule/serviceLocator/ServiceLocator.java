@@ -110,10 +110,7 @@ public class ServiceLocator implements ServiceLocatorInterface{
         return (T)ic.lookup(jndiName);  
         
     }  
-      
-      
-    
-      
+           
     public void close() {  
         try {  
             this.ic.close();  
