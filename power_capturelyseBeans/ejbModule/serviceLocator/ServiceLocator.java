@@ -83,7 +83,7 @@ public class ServiceLocator implements ServiceLocatorInterface{
     	  
         return ServiceLocator.PREFIX + appName + ServiceLocator.SEPARATOR  
                 + moduleName + ServiceLocator.SEPARATOR + ServiceLocator.DISTINCT_NAME 
-                + ServiceLocator.SEPARATOR + beanName + "?stateful" + ifName;  
+                + ServiceLocator.SEPARATOR + beanName + "!" + ifName + "?stateful";  
     }  
     
     /** 
