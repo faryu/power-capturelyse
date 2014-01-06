@@ -65,6 +65,12 @@ public class UserVerwaltungBean implements UserVerwaltungInterface{
     query.setParameter("id_user", id_user);
 	return query.getResultList();
 	
-    } 
+    }
+
+	@Override
+	public String getPasswort(String uname) {
+		// TODO Auto-generated method stub
+		return null;
+	} 
 
 }
