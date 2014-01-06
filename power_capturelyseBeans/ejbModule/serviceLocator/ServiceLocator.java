@@ -26,6 +26,8 @@ public class ServiceLocator implements ServiceLocatorInterface{
     transient private InitialContext ic;  
     private Properties initialContextProperties;
     
+    
+    
     private UserVerwaltungInterface myUserVerwaltung;
     private VerbrauchVerwaltungInterface myVerbrauchVerwaltung;
     private InitialContext ctx;

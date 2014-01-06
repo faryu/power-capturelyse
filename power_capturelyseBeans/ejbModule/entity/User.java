@@ -52,7 +52,7 @@ public class User implements Serializable{
     	adresse = new HashSet<Adresse>();
     }
     
-    public User(int id_user, String username, String uservname, String loginname,String password){
+    public User(int id_user, String username, String uservname, String loginname, String password){
 	this.id_user = id_user;
 	this.username = username;
 	this.uservname = uservname;
@@ -68,9 +68,9 @@ public class User implements Serializable{
 	this.uservname = uservname;
 	this.loginname = loginname;
 	this.password = password;
-	this.loginname = loginname;
 	
     }
+    
     
     public int getId_user() {
         return id_user;
@@ -80,7 +80,7 @@ public class User implements Serializable{
         this.id_user = id_user;
     }
     
-	public String getUsername() {
+    public String getUsername() {
         return username;
     }
 
@@ -99,24 +99,22 @@ public class User implements Serializable{
 
     
     public String getLoginname() {
-		return loginname;
-	}
+	return loginname;
+    }
 
-	public void setLoginname(String loginname) {
-		this.loginname = loginname;
-	}
+    public void setLoginname(String loginname) {
+	this.loginname = loginname;
+    }
 
-	public void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
-    
     
     public String getPassword()
     {
     	return password;
     }
-    
-       
+           
     public Set<Adresse> getAdresse(){
 	return adresse;
     }
