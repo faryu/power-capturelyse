@@ -36,8 +36,9 @@ public class UserVerwaltungBean implements UserVerwaltungInterface{
 
 	@Override
 	public boolean exists(String uname) {
-		// TODO Auto-generated method stub
-		return false;
+		Query q = em.createQuery("select id_user from User where loginname = :uname");
+		q.setParameter("uname", uname);
+		return !q.getResultList().isEmpty();
 	} 
 
     @Override
