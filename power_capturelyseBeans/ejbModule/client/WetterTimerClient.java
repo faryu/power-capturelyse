@@ -20,7 +20,7 @@ public class WetterTimerClient
 	{	
 		ServiceLocator locator = new ServiceLocator();
 		String beanName = WetterBean.class.getSimpleName();
-		wetterRemote = (WetterTimerInterface)locator.getStateless("", "power_capturelyseBeans", beanName, WetterTimerInterface.class);
+		wetterRemote = (WetterTimerInterface)locator.getStateless("pcl-eap", "power_capturelyseBeans", beanName, WetterTimerInterface.class);
 		//WetterTimerInterface remote = doLookup();
 		
 		do
