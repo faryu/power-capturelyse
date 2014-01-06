@@ -13,7 +13,7 @@ import entity.User;
 @Stateful
 public class SessionBean implements SessionRemoteInterface {
 
-	
+
 	private User user;
 	
 	
@@ -30,7 +30,7 @@ public class SessionBean implements SessionRemoteInterface {
 		
 		if(userobject.exists(loginname)==true)
 		{
-	        String digest = null;
+	       
 	        try 
 	        {  System.out.println("Das Passwort lautet: " + password);
 	        	
@@ -43,11 +43,22 @@ public class SessionBean implements SessionRemoteInterface {
 	        {
 	        	ex.printStackTrace();
 	        }
-	
-	      this.user = userobject.findUserLoginName(loginname, hash);
-	      return true;
+	  
+	        
+	        if(userobject.findUserLoginName(loginname, hash)!=null)  
+	        {
+	        	this.user = userobject.findUserLoginName(loginname, hash);
+	           	System.out.println("Passsssssst");
+	        	return true;
+	        }
+	        else
+	        {
+	        	System.out.println("Passsssssst niiiiiiiiiicht"); 
+	        	return false;
+	        }
 		}
-		 return false;
+		
+		return false; 
 	}
 	
 	public String whoIam()

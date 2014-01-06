@@ -2,40 +2,40 @@ package client;
 
 import interfaces.*;
 
-import	java.util.Properties;	
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;	
 
 import	javax.naming.Context;	
-import	javax.naming.InitialContext;	
 import	javax.naming.NamingException;
 
 import sessionBeans.*;
 import client.ClientUtility;
 
 
-public class TestClient {
+public class SessionBeanClient {
 
 
-public	static	void	main(String[]	args)	{	
+public	static	void	main(String[]	args) throws IOException	{	
+		
+
+	BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+					
+	System.out.println("Bitte geben Sie einen Usernamen ein.");
+	String user = console.readLine();
+	System.out.println("Bitte geben Sie das zugehoerige Passwort ein.");
+	String password = console.readLine();	
 	
 	
 	SessionRemoteInterface	remote	=	doLookup();	
 	
-	System.out.println("Bitte geben Sie einen Usernamen ein.");
-	String user = "heim";
-	
-	System.out.println("Bitte geben Sie ein Passwort ein.");
-	String password = "tester";
-	
 	if(remote.identityCheck(user, password)==false)
 	{
 		System.out.println("Ihr Username oder Password ist fehlerhaft");
-		
 	}
 	else
 	{
-		System.out.println("Sie haben sich erfolgreich angemeldet");
-		
-		System.out.println(remote.whoIam());		
+		System.out.println("Sie haben sich erfolgreich angemeldet, ");//+remote.whoIam());
 	}
 	
 }	

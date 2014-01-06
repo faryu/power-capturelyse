@@ -30,11 +30,16 @@ public class Wetter implements Serializable{
     @Column(nullable=false, precision=5, scale=2) private BigDecimal temp;
     
     
+    public Wetter(int plz, BigDecimal temp, Timestamp datum)
+    {       	
+	    this.datum = datum;
+	    this.plz = plz;
+	    this.temp = temp;	    	    
+	}
+    
     public int getId_wetter() {
         return id_wetter;
     }
-
-
 
     public void setId_wetter(int id_wetter) {
         this.id_wetter = id_wetter;

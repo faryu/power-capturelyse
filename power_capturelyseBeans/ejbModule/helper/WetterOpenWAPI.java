@@ -4,13 +4,19 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
+
+import entity.Wetter;
 
 
 public class WetterOpenWAPI 
@@ -78,7 +84,7 @@ public class WetterOpenWAPI
 			e.printStackTrace();
 		}
 	    
-		System.out.println("City URL: " + url);
+		//System.out.println("City URL: " + url);
         xml = result;         
         Document doc = xmlStringToDoc(xml);
         if (!xml.contains("Input error"))
@@ -104,7 +110,7 @@ public class WetterOpenWAPI
 	private static String getWetter(String cityName)
     {
         String url = "http://api.openweathermap.org/data/2.5/weather?q="+cityName+"&mode=xml&units=metric";
-        System.out.println("Wetter URL: "+ url);
+        //System.out.println("Wetter URL: "+ url);
         String xml="", result="";
 		
 		URL urlU;
@@ -138,35 +144,31 @@ public class WetterOpenWAPI
 		{
 			e.printStackTrace();
 		}
-		
-//		ClientRequest cr = new ClientRequest(url);
-//		try {
-//			result = cr.get(String.class).getEntity();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//        //WebResource wr = Client.create().resource(url);
-        xml = result;//wr.accept("text/xml").get(String.class);
+        xml = result;
         return xml;
-    }
+    }	
 	
-	public static void abfrageStarten() 
+	public static List<Wetter> abfrageStarten(List<String> allePlz) 
 	{
-		String[] sAllePLZ   = {"46414","46399", "20095", "10115", "56"};
-						
-		for (String plz:sAllePLZ)
+		//String[] sAllePLZTest   = {"46414","46399", "20095", "10115", "56"};
+		List<Wetter> wetterdatenEntitys=new ArrayList<Wetter> ();
+		System.out.println("Starte Wetterabfrage für "+allePlz.size()+" PLZ.");
+		for (String plz:allePlz)
 		{
 			String ort = search(plz);
 			if (ort!="")
 			{
 				String wetterdaten = getWetter(ort);
-				Document doc = xmlStringToDoc(wetterdaten);
-				System.out.println("Wetterdaten vom "+doc.getElementsByTagName("lastupdate").item(0).getAttributes().item(0).getTextContent()+" für " + plz + " "+ort);
-				System.out.println("Aktuell: " + doc.getElementsByTagName("temperature").item(0).getAttributes().getNamedItem("value").getTextContent()+"\r");
+				Document doc = xmlStringToDoc(wetterdaten);				
+				String temp = doc.getElementsByTagName("temperature").item(0).getAttributes().getNamedItem("value").getTextContent();
+				System.out.println("Timestamp "+doc.getElementsByTagName("lastupdate").item(0).getAttributes().item(0).getTextContent()+" für " + plz + " "+ort+", "+temp); //System.out.println("Aktuell: " + temp +"\r");
+				//BigDecimal bigTemp = new BigDecimal(temp);
+				wetterdatenEntitys.add(new Wetter((Integer.parseInt(plz)), new BigDecimal(temp), new Timestamp(System.currentTimeMillis())));
 			}
 			else
 				System.out.println("Keinen Ort zu PLZ "+plz +" gefunden.");
-		}
+		}		
+		return wetterdatenEntitys;
 	}
 
 }
