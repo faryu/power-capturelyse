@@ -39,7 +39,10 @@ public class WetterTimerClient
 				{
 					System.out.println("Ihre Timer:");
 					String timers =  wetterRemote.showTimer();
-					System.out.println(timers);
+					if (timers.length()==0)
+						System.out.println("Keine Timer vorhanden.");
+					else
+						System.out.println(timers);
 					System.out.println();
 					break;
 				}
