@@ -12,7 +12,7 @@
         <br/>
         Password: <input type="password" name="password" value="${model.password}"/> ${model.errors.password}
         <br/>
-        Vorname:  <input type="text" name="fname" value="${model.fname}"/> ${model.errors.fname}
+        Vorname:  <input type="text" name="vname" value="${model.vname}"/> ${model.errors.vname}
         <br/>
         Nachname: <input type="text" name="name" value="${model.name}"/> ${model.errors.name}
         <br/>

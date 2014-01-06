@@ -25,12 +25,6 @@ import com.googlecode.htmleasy.ViewWith;
 public class UserResource {
 	@EJB
 	private UserVerwaltungInterface userverwaltung;
-
-	@EJB
-	private VerbrauchVerwaltungInterface verbrauchsverwaltung;
-
-	@EJB
-	private AdressVerwaltungInterface adresseverwaltung;
 	
 	@EJB
 	private SessionRemoteInterface sessionBean;
@@ -65,7 +59,7 @@ public class UserResource {
 			user.addError("password", "Passwort muss mindestens 4 Zeichen lang sein!");
 		if(user.errors == null)
 		{
-			userverwaltung.createUser(new entity.User(user.fname, user.name, user.uname, Helper.md5Java(user.password)));
+			userverwaltung.createUser(new entity.User(user.name, user.vname, user.uname, Helper.md5Java(user.password)));
 			throw new RedirectException("/user/login/" + user.uname);
 		}
 		return user;
@@ -103,7 +97,7 @@ public class UserResource {
 			{				
 				HttpSession session = request.getSession();
 				session.setAttribute("pcl-session", sessionBean);
-				throw new RedirectException("/home/" + sessionBean.getUser().getId_user());
+				throw new RedirectException("/home");
 			}
 			else
 			{

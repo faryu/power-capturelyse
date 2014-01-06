@@ -13,8 +13,8 @@ public class User {
 	String uname;
 	@FormParam("password")
 	String password;
-	@FormParam("fname")
-	String fname;
+	@FormParam("vname")
+	String vname;
 	@FormParam("name")
 	String name;
 
@@ -26,12 +26,12 @@ public class User {
 		this.password = password;
 	}
 
-	public String getFname() {
-		return fname;
+	public String getVname() {
+		return vname;
 	}
 
-	public void setFname(String fname) {
-		this.fname = fname;
+	public void setVname(String vname) {
+		this.vname = vname;
 	}
 
 	public String getName() {
