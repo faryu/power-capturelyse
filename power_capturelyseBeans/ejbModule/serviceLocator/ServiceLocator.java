@@ -1,10 +1,16 @@
 package serviceLocator;
 
 import java.util.Properties;
+
 import javax.naming.InitialContext;
+
 import org.jboss.logging.Logger;
+
+import sessionBeans.UserVerwaltungBean;
+
 import javax.naming.Context;
 import javax.naming.NamingException;
+
 import interfaces.UserVerwaltungInterface;
 import interfaces.VerbrauchVerwaltungInterface;
 
@@ -13,9 +19,10 @@ public class ServiceLocator implements ServiceLocatorInterface{
     static Logger logger = Logger.getLogger(ServiceLocator.class);
     
     private static final String URL_PKG_PREFIXES = "org.jboss.ejb.client.naming";  
-    private static final String PROVIDER_URL = "remote://localhost:4447";  
+//    private static final String PROVIDER_URL = "remote://localhost:4447";  
     private static final String PREFIX = "ejb:";  
     private static final String SEPARATOR = "/";  
+    private static final String DISTINCT_NAME = "";
     transient private InitialContext ic;  
     private Properties initialContextProperties;
     
@@ -32,23 +39,23 @@ public class ServiceLocator implements ServiceLocatorInterface{
         	ServiceLocator.URL_PKG_PREFIXES);  
 
         // Fully qualified classname of the factory, which creates the InitialContext  
-        this.initialContextProperties.put(Context.INITIAL_CONTEXT_FACTORY,  
-                org.jboss.naming.remote.client.InitialContextFactory.class  
-                        .getName());  
+//        this.initialContextProperties.put(Context.INITIAL_CONTEXT_FACTORY,  
+//                org.jboss.naming.remote.client.InitialContextFactory.class  
+//                        .getName());  
 
         // At which IP-Adress and at which Port we find JBoss 7?  
         // Default for JBoss AS 7 is Port 4447, instead of localhost you may use another concrete IP-adress  
-        this.initialContextProperties.put(Context.PROVIDER_URL,  
-                ServiceLocator.PROVIDER_URL);  
+//        this.initialContextProperties.put(Context.PROVIDER_URL,  
+//                ServiceLocator.PROVIDER_URL);  
 
         // This generates automatically EJB receiver, otherwise we get an exception  
-        this.initialContextProperties.put(  
-                "jboss.naming.client.ejb.context", true);  
+//        this.initialContextProperties.put(  
+//                "jboss.naming.client.ejb.context", true);  
 
         // Without this we get a NullPointerException  
-        this.initialContextProperties  
-                .put("jboss.naming.client.connect.options.org.xnio.Options.SASL_POLICY_NOPLAINTEXT",  
-                        "false");     
+//        this.initialContextProperties  
+//                .put("jboss.naming.client.connect.options.org.xnio.Options.SASL_POLICY_NOPLAINTEXT",  
+//                        "false");     
     }
     
     
@@ -63,17 +70,19 @@ public class ServiceLocator implements ServiceLocatorInterface{
     
     
     
-    public String getGlobalJNDIName(String appName, String moduleName,String beanName, String ifName) {  
+    public String getGlobalJNDIName(String appName, String moduleName, String beanName, String fullifName) {  
   
         return ServiceLocator.PREFIX + appName + ServiceLocator.SEPARATOR  
-                + moduleName + ServiceLocator.SEPARATOR  
-                + ServiceLocator.SEPARATOR + beanName + "!" + ifName;  
-    } 
+                + moduleName + ServiceLocator.SEPARATOR + ServiceLocator.DISTINCT_NAME 
+                + ServiceLocator.SEPARATOR + beanName + "!" + fullifName;  
+    }
+    
+    
     
     public String getGlobalJNDINameStateful(String appName, String moduleName,String beanName, String ifName) {  
     	  
         return ServiceLocator.PREFIX + appName + ServiceLocator.SEPARATOR  
-                + moduleName + ServiceLocator.SEPARATOR  
+                + moduleName + ServiceLocator.SEPARATOR + ServiceLocator.DISTINCT_NAME 
                 + ServiceLocator.SEPARATOR + beanName + "?stateful" + ifName;  
     }  
     
@@ -87,26 +96,27 @@ public class ServiceLocator implements ServiceLocatorInterface{
      * @param beanName 
      *        simple bean name without package 
      *        can be overridden in the @Stateful-annotation 
-     * @param interfaceClazz 
+     * @param class2 
      *        fully qualified name of the interface class 
      * @return proxy to the bean class 
      * @throws NamingException 
      * @throws ServiceLocatorException 
      */   
     @SuppressWarnings("unchecked")  
-    public <T> T getStateless(String appName, String moduleName,String beanName, Class<T> interfaceClazz) throws NamingException{ 
-        String fullIfName = interfaceClazz.getName();  
-        String jndiName = this.getGlobalJNDINameStateful(appName, moduleName, beanName,  
-                fullIfName);  
+    public <T> T getStateless(String appName, String moduleName,String beanName, Class<T> interfaceClass) throws NamingException{ 
+        String interfaceName = interfaceClass.getName();  
+        String jndiName = this.getGlobalJNDIName(appName, moduleName, beanName,  
+        		interfaceName);  
         return (T)ic.lookup(jndiName);  
         
-    }  
+    }
+    
     
     @SuppressWarnings("unchecked")  
-    public <T> T getStateful(String appName, String moduleName,String beanName, Class<T> interfaceClazz) throws NamingException{ 
-        String fullIfName = interfaceClazz.getName();  
-        String jndiName = this.getGlobalJNDIName(appName, moduleName, beanName,  
-                fullIfName);  
+    public <T> T getStateful(String appName, String moduleName,String beanName, Class<T> interfaceClass) throws NamingException{ 
+        String interfaceName = interfaceClass.getName();  
+        String jndiName = this.getGlobalJNDINameStateful(appName, moduleName, beanName,  
+        		interfaceName);  
         return (T)ic.lookup(jndiName);  
         
     }  
