@@ -21,10 +21,10 @@ public	static	void	main(String[]	args)	{
 	SessionRemoteInterface	remote	=	doLookup();	
 	
 	System.out.println("Bitte geben Sie einen Usernamen ein.");
-	String user = "wille";
+	String user = "heim";
 	
 	System.out.println("Bitte geben Sie ein Passwort ein.");
-	String password = "test0815";
+	String password = "tester";
 	
 	if(remote.identityCheck(user, password)==false)
 	{

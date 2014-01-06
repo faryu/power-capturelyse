@@ -1,17 +1,20 @@
 package sessionBeans;
 
-import java.security.MessageDigest;
+import helper.Helper;
+import interfaces.SessionRemoteInterface;
+import interfaces.UserVerwaltungInterface;
 
-import interfaces.*;
+import javax.ejb.EJB;
+import javax.ejb.Stateful;
 
-import javax.ejb.*;
+import entity.User;
 
 
 @Stateful
 public class SessionBean implements SessionRemoteInterface {
 
 	
-	private String user;
+	private User user;
 	
 	
 	@EJB
@@ -23,54 +26,33 @@ public class SessionBean implements SessionRemoteInterface {
 		
 		System.out.println("(User ist vorhanden)"+ userobject.exists(loginname));
 		
+		String hash = "";
+		
 		if(userobject.exists(loginname)==true)
 		{
 	        String digest = null;
 	        try 
 	        {  System.out.println("Das Passwort lautet: " + password);
 	        	
-	            MessageDigest md = MessageDigest.getInstance("MD5");
-	            byte[] hash = md.digest(password.getBytes("UTF-8"));
-	           
-	            //converting byte array to Hexadecimal String
-	           StringBuilder sb = new StringBuilder(2*hash.length);
-	           for(byte b : hash)
-	           {
-	               sb.append(String.format("%02x", b&0xff));
-	           }          
-	           digest = sb.toString();
-	          
-	           System.out.println("Das MD5 Hash lautet: " + digest);
+	        	hash = Helper.md5Java(password);
+	        	       	          
+	           System.out.println("Das MD5 Hash lautet: " + hash);
 	        	
 	        } 
 	        catch (Exception ex)
 	        {
 	        	ex.printStackTrace();
 	        }
-	        
-			if(userobject.getPasswort(loginname).contains(digest))
-			{
-				System.out.println("Das eigebene Passwort ist korrekt!");
-				this.user = loginname;
-				return true;				
-			}	
-			else
-			{
-				System.out.println("Das eingebene Passwort ist nicht korrekt");
-				return false;
-			}
-		
+	
+	      this.user = userobject.findUserLoginName(loginname, hash);
+	      return true;
 		}
-		else
-		{
-			System.out.println("Der eigebene Loginname existiert nicht!");
-			return false;
-		}			
+		 return false;
 	}
 	
 	public String whoIam()
 		{
-			return this.user;
+			return this.user.getUsername();
 		}
 		
 	
