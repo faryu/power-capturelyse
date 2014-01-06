@@ -87,7 +87,11 @@ public class UserResource {
 	{
 		if(!userverwaltung.exists(user.uname))
 			user.addError("uname", "User existiert nicht");
-		
+		if(user.errors == null)
+		{
+			// User login hinzufügen
+			
+		}
 		return user;
 	}
 }
