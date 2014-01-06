@@ -1,17 +1,20 @@
 package sessionBeans;
 
-import java.security.MessageDigest;
+import helper.Helper;
+import interfaces.SessionRemoteInterface;
+import interfaces.UserVerwaltungInterface;
 
-import interfaces.*;
-import helper.*;
-import javax.ejb.*;
+import javax.ejb.EJB;
+import javax.ejb.Stateful;
+
+import entity.User;
 
 
 @Stateful
 public class SessionBean implements SessionRemoteInterface {
 
 	
-	private String user;
+	private User user;
 	
 	
 	@EJB
@@ -19,7 +22,7 @@ public class SessionBean implements SessionRemoteInterface {
 	
 	public boolean identityCheck(String loginname, String password) {
 				
-		// Hier wird eine Funktion benötigt die schaut ob es den Usernamen gibt
+		// Hier wird eine Funktion benï¿½tigt die schaut ob es den Usernamen gibt
 		
 		System.out.println("(User ist vorhanden)"+ userobject.exists(loginname));
 		
@@ -40,31 +43,22 @@ public class SessionBean implements SessionRemoteInterface {
 	        {
 	        	ex.printStackTrace();
 	        }
-	        
-			if(userobject.getPasswort(loginname).contains(hash))
-			{
-				System.out.println("Das eigebene Passwort ist korrekt!");
-				this.user = loginname;
-				return true;			
-			}	
-			else
-			{
-				System.out.println("Das eingebene Passwort ist nicht korrekt");
-				return false;
-			}
-		
+	
+	      this.user = userobject.findUserLoginName(loginname, hash);
+	      return true;
 		}
-		else
-		{
-			System.out.println("Der eigebene Loginname existiert nicht!");
-			return false;
-		}			
+		 return false;
 	}
 	
 	public String whoIam()
 		{
-			return this.user;
+			return this.user.getUsername();
 		}
+
+	@Override
+	public User getUser() {
+		return user;
+	}
 		
 	
 	

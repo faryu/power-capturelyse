@@ -2,14 +2,18 @@ package de.whs.mwa.pcl.rs;
 
 import helper.Helper;
 import interfaces.AdressVerwaltungInterface;
+import interfaces.SessionRemoteInterface;
 import interfaces.UserVerwaltungInterface;
 import interfaces.VerbrauchVerwaltungInterface;
 
 import javax.ejb.EJB;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Context;
 
 import org.jboss.resteasy.annotations.Form;
 
@@ -27,6 +31,9 @@ public class UserResource {
 
 	@EJB
 	private AdressVerwaltungInterface adresseverwaltung;
+	
+	@EJB
+	private SessionRemoteInterface sessionBean;
 
 	@GET
 	@Path("/register")
@@ -84,13 +91,24 @@ public class UserResource {
 	@POST
 	@Path("/login")
 	@ViewWith("/user_login.jsp")
-	public User login(@Form User user)
+	public User login(@Form User user, @Context HttpServletRequest request)
 	{
 		if(!userverwaltung.exists(user.uname))
 			user.addError("uname", "User existiert nicht");
 		if(user.errors == null)
 		{
 			// User login hinzufügen
+			
+			if(sessionBean.identityCheck(user.uname, user.password))
+			{				
+				HttpSession session = request.getSession();
+				session.setAttribute("pcl-session", sessionBean);
+				throw new RedirectException("/home/" + sessionBean.getUser().getId_user());
+			}
+			else
+			{
+				user.addError("password", "Passwort falsch!");
+			}
 			
 		}
 		return user;

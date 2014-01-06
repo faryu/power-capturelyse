@@ -71,16 +71,22 @@ public class UserVerwaltungBean implements UserVerwaltungInterface{
 	
     }
 
-	@Override
-	public String getPasswort(String uname) {
-		// Zum Usernamen HASH string aus der DB
-		return "f01c206105c4d0d7b3128fd9f5a5bee6";
-	}
+
 
 	@Override
-	public User findUserLoginName(String unname) {
-		// TODO Zum Loginnamen User Object
-		return null;
+	public User findUserLoginName(String uname, String password) {
+		Query q = em.createQuery("select id_user from User where loginname = :uname AND password = :password");
+		q.setParameter("uname", uname);
+		q.setParameter("password", password);
+		List<Integer> result = q.getResultList();
+		if(result.isEmpty())
+		{
+			return null;
+		}
+		else
+		{
+			return findUser(result.get(0));
+		}
 	} 
 
 }
