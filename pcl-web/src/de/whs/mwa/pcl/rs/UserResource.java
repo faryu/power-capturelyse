@@ -11,21 +11,21 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
 import org.jboss.resteasy.annotations.Form;
-import org.jboss.security.auth.callback.UsernamePasswordHandler;
 
+import com.googlecode.htmleasy.RedirectException;
 import com.googlecode.htmleasy.View;
 import com.googlecode.htmleasy.ViewWith;
 
 @Path("/user")
 public class UserResource {
 	@EJB
-	private static UserVerwaltungInterface userverwaltung;
+	private UserVerwaltungInterface userverwaltung;
 
 	@EJB
-	private static VerbrauchVerwaltungInterface verbrauchsverwaltung;
+	private VerbrauchVerwaltungInterface verbrauchsverwaltung;
 
 	@EJB
-	private static AdressVerwaltungInterface adresseverwaltung;
+	private AdressVerwaltungInterface adresseverwaltung;
 
 	@GET
 	@Path("/register")
@@ -53,9 +53,10 @@ public class UserResource {
 			user.addError("uname", "Username bereits vergeben");
 		if(user.uname == null || user.uname.length() < 3)
 			user.addError("uname", "username muss mindestens 4 Zeichen lang sein!");
-		if(user.errors.size() == 0)
+		if(user.errors == null)
 		{
 			userverwaltung.createUser(new entity.User(user.fname, user.name, user.uname, user.password));
+			throw new RedirectException("/user/login/" + user.uname);
 		}
 		return user;
 	}

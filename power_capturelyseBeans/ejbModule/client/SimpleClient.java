@@ -34,7 +34,7 @@ public class SimpleClient {
     	Adresse adresse = new Adresse("Vardingholter Str. 15", 46414, "Rhede", user);
     	//Verbrauch verbrauch = new Verbrauch();
     	
-    	user = userverwaltung.createUser(user,adresse);
+    	userverwaltung.createUser(user);
 //    	adresse = userverwaltung.findAdresse(1);
     	OutputHelper.output(userverwaltung.findUserAdresse(1));   	
 //    	OutputHelper.output(verbrauchsverwaltung.getVerbraeuche(1));

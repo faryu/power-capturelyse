@@ -18,6 +18,40 @@ public class User {
 	@FormParam("name")
 	String name;
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getFname() {
+		return fname;
+	}
+
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Map<String, String> getErrors() {
+		return errors;
+	}
+
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
+	
+	public String getUname() { return uname; }
+
 	Map<String, String> errors;
 
 	public void addError(String key, String msg) {
