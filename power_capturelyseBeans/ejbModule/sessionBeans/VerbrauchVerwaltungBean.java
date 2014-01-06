@@ -54,7 +54,7 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 			int id_energietyp, Date datumVon, Date datumBis) {		
 		Query query = em.createQuery("SELECT v from Verbrauch v where v.adresse.id_adresse = :id_adresse " + 
 				"and v.energietyp.id_energietyp= :id_energietyp " + 
-				"and (v.datum between :datumVon and :datumBis + )");
+				"and (v.datum between :datumVon and :datumBis )");
 		query.setParameter("id_adresse",id_adresse );
 		query.setParameter("id_energietyp",id_energietyp );
 		query.setParameter("datumVon",datumVon );

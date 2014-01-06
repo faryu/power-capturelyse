@@ -61,9 +61,12 @@ public class User implements Serializable{
 	
     }
     
-    public User(String username, String uservname, String loginname, String password){	
+
+    public User(String username, String uservname, String loginname,String password){	
+
 	this.username = username;
 	this.uservname = uservname;
+	this.loginname = loginname;
 	this.password = password;
 	this.loginname = loginname;
 	
@@ -77,8 +80,7 @@ public class User implements Serializable{
         this.id_user = id_user;
     }
     
-    
-    public String getUsername() {
+	public String getUsername() {
         return username;
     }
 

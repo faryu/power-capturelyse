@@ -68,6 +68,13 @@ public class ServiceLocator implements ServiceLocatorInterface{
         return ServiceLocator.PREFIX + appName + ServiceLocator.SEPARATOR  
                 + moduleName + ServiceLocator.SEPARATOR  
                 + ServiceLocator.SEPARATOR + beanName + "!" + ifName;  
+    } 
+    
+    public String getGlobalJNDINameStateful(String appName, String moduleName,String beanName, String ifName) {  
+    	  
+        return ServiceLocator.PREFIX + appName + ServiceLocator.SEPARATOR  
+                + moduleName + ServiceLocator.SEPARATOR  
+                + ServiceLocator.SEPARATOR + beanName + "?stateful" + ifName;  
     }  
     
     /** 
@@ -89,11 +96,21 @@ public class ServiceLocator implements ServiceLocatorInterface{
     @SuppressWarnings("unchecked")  
     public <T> T getStateless(String appName, String moduleName,String beanName, Class<T> interfaceClazz) throws NamingException{ 
         String fullIfName = interfaceClazz.getName();  
+        String jndiName = this.getGlobalJNDINameStateful(appName, moduleName, beanName,  
+                fullIfName);  
+        return (T)ic.lookup(jndiName);  
+        
+    }  
+    
+    @SuppressWarnings("unchecked")  
+    public <T> T getStateful(String appName, String moduleName,String beanName, Class<T> interfaceClazz) throws NamingException{ 
+        String fullIfName = interfaceClazz.getName();  
         String jndiName = this.getGlobalJNDIName(appName, moduleName, beanName,  
                 fullIfName);  
         return (T)ic.lookup(jndiName);  
         
     }  
+      
       
     
       
