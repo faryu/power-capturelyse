@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.ws.rs.core.Application;
 
+import com.googlecode.htmleasy.HtmleasyProviders;
+
 public class App extends Application {
 	private Set<Object> singletons;
 	private Set<Class<?>> classes;
@@ -14,6 +16,9 @@ public class App extends Application {
 		classes = new HashSet<Class<?>>();
 		
 		singletons.add(new Test());
+		singletons.add(new UserResource());
+		
+		classes.addAll(HtmleasyProviders.getClasses());
 	}
 
 	@Override
