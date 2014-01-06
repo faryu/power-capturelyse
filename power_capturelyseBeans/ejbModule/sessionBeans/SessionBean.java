@@ -22,7 +22,7 @@ public class SessionBean implements SessionRemoteInterface {
 	
 	public boolean identityCheck(String loginname, String password) {
 				
-		// Hier wird eine Funktion benötigt die schaut ob es den Usernamen gibt
+		// Hier wird eine Funktion benï¿½tigt die schaut ob es den Usernamen gibt
 		
 		System.out.println("(User ist vorhanden)"+ userobject.exists(loginname));
 		
@@ -54,6 +54,11 @@ public class SessionBean implements SessionRemoteInterface {
 		{
 			return this.user.getUsername();
 		}
+
+	@Override
+	public User getUser() {
+		return user;
+	}
 		
 	
 	

@@ -103,7 +103,7 @@ public class UserResource {
 			{				
 				HttpSession session = request.getSession();
 				session.setAttribute("pcl-session", sessionBean);
-				throw new RedirectException("/home");
+				throw new RedirectException("/home/" + sessionBean.getUser().getId_user());
 			}
 			else
 			{
