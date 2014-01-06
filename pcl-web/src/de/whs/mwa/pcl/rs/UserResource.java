@@ -52,12 +52,42 @@ public class UserResource {
 		if(userverwaltung.exists(user.uname))
 			user.addError("uname", "Username bereits vergeben");
 		if(user.uname == null || user.uname.length() < 3)
-			user.addError("uname", "username muss mindestens 4 Zeichen lang sein!");
+			user.addError("uname", "username muss mindestens 3 Zeichen lang sein!");
+		if(user.password == null || user.password.length() < 4)
+			user.addError("password", "Passwort muss mindestens 4 Zeichen lang sein!");
 		if(user.errors == null)
 		{
 			userverwaltung.createUser(new entity.User(user.fname, user.name, user.uname, user.password));
 			throw new RedirectException("/user/login/" + user.uname);
 		}
+		return user;
+	}
+	
+	@GET
+	@Path("/login")
+	public View login()
+	{
+		return new View("/user_login.jsp");
+	}
+	
+	@GET
+	@Path("/login/{uname}")
+	@ViewWith("/user_login.jsp")
+	public User login(@PathParam("uname") final String uname)
+	{
+		User user = new User();
+		user.uname = uname;
+		return user;
+	}
+	
+	@POST
+	@Path("/login")
+	@ViewWith("/user_login.jsp")
+	public User login(@Form User user)
+	{
+		if(!userverwaltung.exists(user.uname))
+			user.addError("uname", "User existiert nicht");
+		
 		return user;
 	}
 }
