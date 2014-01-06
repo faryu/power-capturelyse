@@ -37,7 +37,7 @@ public class UserVerwaltungBean implements UserVerwaltungInterface{
 	@Override
 	public boolean exists(String uname) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	} 
 
     @Override
@@ -70,7 +70,7 @@ public class UserVerwaltungBean implements UserVerwaltungInterface{
 	@Override
 	public String getPasswort(String uname) {
 		// TODO Auto-generated method stub
-		return null;
+		return "test0815";
 	} 
 
 }
