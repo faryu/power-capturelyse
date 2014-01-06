@@ -18,23 +18,20 @@ import com.googlecode.htmleasy.ViewWith;
 public class HomeResource {
 	@EJB
 	private VerbrauchVerwaltungInterface verbrauchsverwaltung;
-
-	@EJB
-	private AdressVerwaltungInterface adresseverwaltung;
 	
 	@GET
 	@ViewWith("/home.jsp")
-	public Home home(@Context HttpServletRequest request)
+	public entity.User home(@Context HttpServletRequest request)
 	{
-		System.out.println("called");
+		return currentUser(request);
+	}
+	
+	static public entity.User currentUser(HttpServletRequest request)
+	{
 		HttpSession session = request.getSession();
 		SessionRemoteInterface sessionBean = (SessionRemoteInterface) session.getAttribute("pcl-session");
 		if(sessionBean == null)
 			throw new RedirectException("/user/login");
-		Home home = new Home();
-		home.uname = sessionBean.getUser().getLoginname();
-		home.vname = sessionBean.getUser().getUservname();
-		home.name = sessionBean.getUser().getUsername();
-		return home;
+		return sessionBean.getUser();
 	}
 }

@@ -18,6 +18,7 @@ public class App extends Application {
 		singletons.add(new Test());
 		classes.add(UserResource.class);
 		classes.add(HomeResource.class);
+		classes.add(AddressResource.class);
 		
 		classes.addAll(HtmleasyProviders.getClasses());
 	}

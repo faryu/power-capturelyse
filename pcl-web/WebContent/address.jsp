@@ -4,12 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Power Capturelyse</title>
+<title>Adresse</title>
 </head>
 <body>
-<h1>Power Capturelyse</h1>
-<a href="/pcl-web/user/register">Registrierung</a><br>
-<a href="/pcl-web/user/login">Login</a><br>
-<a href="/pcl-web/home">Home</a>
+<h3>${model.strasse}, ${model.plz} ${model.ort}</h3>
 </body>
 </html>
