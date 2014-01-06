@@ -20,11 +20,15 @@ public class SessionBean implements SessionRemoteInterface {
 	public boolean identityCheck(String loginname, String password) {
 				
 		// Hier wird eine Funktion benötigt die schaut ob es den Usernamen gibt
+		
+		System.out.println("(User ist vorhanden)"+ userobject.exists(loginname));
+		
 		if(userobject.exists(loginname)==true)
 		{
 	        String digest = null;
 	        try 
-	        {
+	        {  System.out.println("Das Passwort lautet: " + password);
+	        	
 	            MessageDigest md = MessageDigest.getInstance("MD5");
 	            byte[] hash = md.digest(password.getBytes("UTF-8"));
 	           
@@ -36,6 +40,8 @@ public class SessionBean implements SessionRemoteInterface {
 	           }          
 	           digest = sb.toString();
 	          
+	           System.out.println("Das MD5 Hash lautet: " + digest);
+	        	
 	        } 
 	        catch (Exception ex)
 	        {
