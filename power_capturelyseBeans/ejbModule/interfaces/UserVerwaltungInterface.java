@@ -17,6 +17,6 @@ public interface UserVerwaltungInterface {
 //    public List<String> findUserAdresse(int id_user);
     public List<Object []> findUserAdresse(int id_user);
     public Adresse findAdresse(int id);
-    
+    public String getPasswort(String uname);
 
 }
