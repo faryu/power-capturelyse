@@ -3,7 +3,7 @@ package sessionBeans;
 import java.security.MessageDigest;
 
 import interfaces.*;
-
+import helper.*;
 import javax.ejb.*;
 
 
@@ -23,24 +23,18 @@ public class SessionBean implements SessionRemoteInterface {
 		
 		System.out.println("(User ist vorhanden)"+ userobject.exists(loginname));
 		
+		String hash = "";
+		
 		if(userobject.exists(loginname)==true)
 		{
 	        String digest = null;
 	        try 
 	        {  System.out.println("Das Passwort lautet: " + password);
 	        	
-	            MessageDigest md = MessageDigest.getInstance("MD5");
-	            byte[] hash = md.digest(password.getBytes("UTF-8"));
-	           
-	            //converting byte array to Hexadecimal String
-	           StringBuilder sb = new StringBuilder(2*hash.length);
-	           for(byte b : hash)
-	           {
-	               sb.append(String.format("%02x", b&0xff));
-	           }          
-	           digest = sb.toString();
+	        	hash = Helper.md5Java(password);
+	        	       
 	          
-	           System.out.println("Das MD5 Hash lautet: " + digest);
+	           System.out.println("Das MD5 Hash lautet: " + hash);
 	        	
 	        } 
 	        catch (Exception ex)
@@ -48,7 +42,7 @@ public class SessionBean implements SessionRemoteInterface {
 	        	ex.printStackTrace();
 	        }
 	        
-			if(userobject.getPasswort(loginname).contains(digest))
+			if(userobject.getPasswort(loginname).contains(hash))
 			{
 				System.out.println("Das eigebene Passwort ist korrekt!");
 				this.user = loginname;
