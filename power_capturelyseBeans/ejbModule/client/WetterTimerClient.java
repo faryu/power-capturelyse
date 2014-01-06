@@ -18,14 +18,14 @@ public class WetterTimerClient
 	
 	public static void main (String args[]) throws Exception
 	{	
+		Boolean run = true;
 		ServiceLocator locator = new ServiceLocator();
 		String beanName = WetterBean.class.getSimpleName();
 		wetterRemote = (WetterTimerInterface)locator.getStateless("pcl-eap", "power_capturelyseBeans", beanName, WetterTimerInterface.class);
-		//WetterTimerInterface remote = doLookup();
-		
+						
 		do
 		{
-			System.out.println("Bitte wählen:");
+			System.out.println("Bitte wählen (0=Ende):");
 			System.out.println("1 - Timer anzeigen");
 			System.out.println("2 - Timer beenden");
 			System.out.println("3 - Timer erstellen");
@@ -45,7 +45,9 @@ public class WetterTimerClient
 				}
 				case 2:
 				{	
-					System.out.println("Bitte geben Sie einen Namen für den Timer ein: ");
+					String timers =  wetterRemote.showTimer();
+					System.out.println(timers);
+					System.out.println("Bitte geben Sie den Namen des Timers ein: ");
 					String name = console.readLine();
 					wetterRemote.stopTimer(name);
 					break;
@@ -54,14 +56,19 @@ public class WetterTimerClient
 				{
 					System.out.println("Bitte geben Sie einen Namen für den Timer ein: ");					
 					String name = console.readLine();
-					System.out.println("Bitte geben Sie einen Intervall für den Timer ein (ms): ");					
+					System.out.println("Bitte geben Sie einen Intervall für den Timer ein (Sekunden): ");					
 					String intervall = console.readLine();					
-					wetterRemote.createTimer(Long.parseLong(intervall), name);
+					wetterRemote.createTimer(Long.parseLong(intervall)*1000, name);
+					break;
+				}
+				case 0:
+				{
+					run = false;
 					break;
 				}
 			}
 		} 
-		while (true);
+		while (run);
 	}
 	
 //	private static WetterTimerInterface doLookup()
@@ -86,7 +93,7 @@ public class WetterTimerClient
 //	private static String getLookupName()
 //	{
 //		String appName ="";
-//		String moduleName="WetterBeanTimer";
+//		String moduleName="power_capturelyseBeans";
 //		String distincName ="";
 //		String beanName= WetterBean.class.getSimpleName(); // "QuoterBean";
 //		final String interfaceName = WetterTimerInterface.class.getName();
