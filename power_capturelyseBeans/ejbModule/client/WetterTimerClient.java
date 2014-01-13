@@ -48,8 +48,6 @@ public class WetterTimerClient
 				}
 				case 2:
 				{	
-					String timers =  wetterRemote.showTimer();
-					System.out.println(timers);
 					System.out.println("Bitte geben Sie den Namen des Timers ein: ");
 					String name = console.readLine();
 					wetterRemote.stopTimer(name);
