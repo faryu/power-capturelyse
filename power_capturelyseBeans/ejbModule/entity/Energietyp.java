@@ -32,7 +32,7 @@ public class Energietyp implements Serializable{
     private String einheit;
     
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "energietyp")
-    private Set<Verbrauch> verbrauch;
+    private Set<Zaehler> zaehler;
     
     
 
@@ -69,12 +69,12 @@ public class Energietyp implements Serializable{
     }
 	
 	
-    public Set<Verbrauch> getVerbrauch() {
-	 return verbrauch;
+    public Set<Zaehler> getZaehler() {
+	 return zaehler;
     }
 
-    public void setVerbrauch(Set<Verbrauch> verbrauch) {
-	 this.verbrauch = verbrauch;
+    public void setZaehler(Set<Zaehler> zaehler) {
+	 this.zaehler = zaehler;
     }
 
 	

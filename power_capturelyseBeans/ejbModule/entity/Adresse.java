@@ -44,14 +44,13 @@ public class Adresse implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="id_user", referencedColumnName="id_user", nullable=false, columnDefinition="INTEGER(11)")			
 	private User user;
+
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "adresse")
-	@OrderBy("energietyp, datum")
-	private Set<Verbrauch> verbrauch;
-
+	private Set<Zaehler> zaehler;
 
 	public Adresse(){
-		verbrauch = new HashSet<Verbrauch>();
+		zaehler = new HashSet<Zaehler>();
 		
 	}
 	
@@ -131,20 +130,13 @@ public class Adresse implements Serializable{
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
 		
-	public Set<Verbrauch> getVerbrauch(){
-	    return verbrauch;
+	public Set<Zaehler> getZaehler() {
+		return zaehler;
 	}
-	
-	public void setVerbrauch(Set<Verbrauch> verbrauch){
-	    this.verbrauch = verbrauch;
-	    
+
+	public void setZaehler(Set<Zaehler> zaehler) {
+		this.zaehler = zaehler;
 	}
-	
-	
-	
-	
-	
 
 }
