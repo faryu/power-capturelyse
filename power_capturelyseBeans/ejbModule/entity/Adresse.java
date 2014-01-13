@@ -68,6 +68,7 @@ public class Adresse implements Serializable{
 	    this.plz = plz;
 	    this.ort = ort;
 	    this.user = user;
+	    user.getAdresse().add(this);
 	    	    
 	}
 	

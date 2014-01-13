@@ -22,7 +22,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="tb_user")
-//@SecondaryTable(name="tb_adresse")
 
 public class User implements Serializable{
 
