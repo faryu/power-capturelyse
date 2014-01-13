@@ -37,11 +37,11 @@ public class WetterBean implements WetterTimerInterface
 	}
 	
 	@Timeout
-	public void timeOutHandler(Timer timer)
+	void timeOutHandler(Timer timer) // ohne Modifier Zugriff für Klasse und Package
 	{
 		System.out.println("timeoutHandler : " + timer.getInfo());		
 		List<Wetter> wetterdaten = WetterOpenWAPI.abfrageStarten(getPLZ()); // Abfrage der Wetterdaten für alle PLZ		
-		addWetter(wetterdaten); // Speichern der gelieferten Daten
+		saveWetter(wetterdaten); // Speichern der gelieferten Daten
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class WetterBean implements WetterTimerInterface
 		return allePlz;
 	}
 	
-	private void addWetter(List<Wetter> alleWetterdaten)
+	private void saveWetter(List<Wetter> alleWetterdaten)
     {
     	for (Wetter wetter:alleWetterdaten)
     		em.persist(wetter);

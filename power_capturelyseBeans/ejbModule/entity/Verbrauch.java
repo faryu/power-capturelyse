@@ -3,6 +3,7 @@ package entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,28 +31,23 @@ public class Verbrauch implements Serializable{
     private int id_verbrauch;
     
     @ManyToOne    
-    @JoinColumn(name="id_adresse", referencedColumnName="id_adresse", nullable=false, columnDefinition="INTEGER(11)")		
-    private Adresse adresse;
-    
-    @ManyToOne
-    @JoinColumn(name="id_energietyp", referencedColumnName="id_energietyp", nullable=false, columnDefinition="INTEGER(11)")	
-    private Energietyp energietyp;
+    @JoinColumn(name="id_zaehler", referencedColumnName="id_zaehler", nullable=false, columnDefinition="INTEGER(11)")		
+    private Zaehler zaehler;
     
     @Column(nullable=false, precision=14, scale=2)
     private BigDecimal zaehlerstand;    
     @Column(nullable=false)
-    private Timestamp datum;           
+    private Date datum;           
     
        
     public Verbrauch(){
     	
     }
     
-    public Verbrauch(Adresse adresse, BigDecimal zaehlerstand, Timestamp datum, Energietyp energietyp){
-	this.adresse = adresse;
+    public Verbrauch(Zaehler zaehler, BigDecimal zaehlerstand, Date datum){
+	this.zaehler = zaehler;
 	this.datum = datum;
 	this.zaehlerstand = zaehlerstand;
-	this.energietyp = energietyp;
 	
     }
     
@@ -68,20 +64,12 @@ public class Verbrauch implements Serializable{
         this.id_verbrauch = id_verbrauch;
     }
     
-    public Adresse getAadresse() {
-        return adresse;
+    public Zaehler getZaehler() {
+        return zaehler;
     }
 
-    public void setAdresse(Adresse adresse) {
-        this.adresse = adresse;
-    }
-    
-    public Energietyp getEnergietyp() {
-        return energietyp;
-    }
-
-    public void setEnergietyp(Energietyp energietyp) {
-        this.energietyp = energietyp;
+    public void setZaehler(Zaehler zaehler) {
+        this.zaehler = zaehler;
     }
     
     public BigDecimal getZaehlerstand() {
@@ -92,8 +80,8 @@ public class Verbrauch implements Serializable{
         this.zaehlerstand = zaehlerstand;
     }
 
-    @Temporal(TemporalType.TIMESTAMP)   
-    public Timestamp getDatum() {
+    @Temporal(TemporalType.DATE)   
+    public Date getDatum() {
         return datum;
     }
     
