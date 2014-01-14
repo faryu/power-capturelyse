@@ -51,16 +51,6 @@ public class User implements Serializable{
     	adresse = new HashSet<Adresse>();
     }
     
-    public User(int id_user, String username, String uservname, String loginname, String password){
-	this.id_user = id_user;
-	this.username = username;
-	this.uservname = uservname;
-	this.loginname = loginname;
-	this.password = password;
-	
-    }
-    
-
     public User(String username, String uservname, String loginname,String password){	
 
 	this.username = username;
