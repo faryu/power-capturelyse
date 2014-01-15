@@ -25,7 +25,7 @@ public class WetterTimerClient
 						
 		do
 		{
-			System.out.println("Bitte wählen (0=Ende):");
+			System.out.println("Bitte wï¿½hlen (0=Ende):");
 			System.out.println("1 - Timer anzeigen");
 			System.out.println("2 - Timer beenden");
 			System.out.println("3 - Timer erstellen");
@@ -55,9 +55,9 @@ public class WetterTimerClient
 				}
 				case 3:
 				{
-					System.out.println("Bitte geben Sie einen Namen für den Timer ein: ");					
+					System.out.println("Bitte geben Sie einen Namen fï¿½r den Timer ein: ");					
 					String name = console.readLine();
-					System.out.println("Bitte geben Sie einen Intervall für den Timer ein (Sekunden): ");					
+					System.out.println("Bitte geben Sie einen Intervall fï¿½r den Timer ein (Sekunden): ");					
 					String intervall = console.readLine();					
 					wetterRemote.createTimer(Long.parseLong(intervall)*1000, name);
 					break;
@@ -81,7 +81,7 @@ public class WetterTimerClient
 //		{
 //			context = ClientUtility.getInitialContext(); // Holt Kontext
 //			String lookupName = getLookupName(); // Lookup Name generieren			
-//			remote = (WetterTimerInterface)context.lookup(lookupName); // Lookup ausführen und Casten			
+//			remote = (WetterTimerInterface)context.lookup(lookupName); // Lookup ausfï¿½hren und Casten			
 //		}
 //		catch (NamingException ex)
 //		{

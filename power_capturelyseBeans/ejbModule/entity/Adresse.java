@@ -48,26 +48,21 @@ public class Adresse implements Serializable{
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "adresse")
 	private Set<Zaehler> zaehler;
+	
+	
 
 	public Adresse(){
 		zaehler = new HashSet<Zaehler>();
 		
 	}
 	
-//	public Adresse(int id_adresse, String strasse, int plz, String ort, User id_user){
-//	    this.id_adresse = id_adresse;
-//	    this.strasse = strasse;
-//	    this.plz = plz;
-//	    this.ort = ort;
-//	    this.id_user = id_user;
-//	    	    
-//	}
 	
 	public Adresse(String strasse, int plz, String ort, User user){	    
 	    this.strasse = strasse;
 	    this.plz = plz;
 	    this.ort = ort;
 	    this.user = user;
+	    user.getAdresse().add(this);
 	    	    
 	}
 	
@@ -75,6 +70,7 @@ public class Adresse implements Serializable{
 	    this.strasse = strasse;
 	    this.plz = plz;
 	    this.ort = ort;
+	    user.getAdresse().add(this);
 	    
 	    	    
 	}

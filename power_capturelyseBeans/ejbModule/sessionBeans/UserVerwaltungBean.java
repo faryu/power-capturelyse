@@ -31,7 +31,7 @@ public class UserVerwaltungBean implements UserVerwaltungInterface{
     
     @Override
 	public void createUser(User user) {
-		em.persist(user);
+		em.persist(user);		
 	}
 
 	@Override
@@ -54,8 +54,7 @@ public class UserVerwaltungBean implements UserVerwaltungInterface{
 	return em.find(Adresse.class, id);
     }
 
-    
-    //ToDo anbinden an JSP wegen usernamen usw.
+        
 //    @Override
     public void updateUser(User user) {
 	em.merge(user);	
@@ -73,11 +72,12 @@ public class UserVerwaltungBean implements UserVerwaltungInterface{
 
 
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public User findUserLoginName(String uname, String password) {
 		Query q = em.createQuery("select id_user from User where loginname = :uname AND password = :password");
 		q.setParameter("uname", uname);
-		q.setParameter("password", password);
+		q.setParameter("password", password);		
 		List<Integer> result = q.getResultList();
 		if(result.isEmpty())
 		{
