@@ -14,7 +14,7 @@ import javax.naming.NamingException;
 import interfaces.UserVerwaltungInterface;
 import interfaces.VerbrauchVerwaltungInterface;
 
-public class ServiceLocator implements ServiceLocatorInterface{
+public class ServiceLocator {
     
     static Logger logger = Logger.getLogger(ServiceLocator.class);
     
@@ -25,11 +25,7 @@ public class ServiceLocator implements ServiceLocatorInterface{
     private static final String DISTINCT_NAME = "";
     transient private InitialContext ic;  
     private Properties initialContextProperties;
-    
-    
-    
-    private UserVerwaltungInterface myUserVerwaltung;
-    private VerbrauchVerwaltungInterface myVerbrauchVerwaltung;
+         
     private InitialContext ctx;
     static Context context = null;
     
@@ -132,16 +128,5 @@ public class ServiceLocator implements ServiceLocatorInterface{
     }  
     
 
-    @Override
-    public UserVerwaltungInterface getUserVerwaltung() {
-	// TODO Automatisch generierter Methodenstub
-	return myUserVerwaltung;
-    }
-
-    @Override
-    public VerbrauchVerwaltungInterface getVerbrauchVerwaltung() {
-	// TODO Automatisch generierter Methodenstub
-	return myVerbrauchVerwaltung;
-    }
-
+    
 }

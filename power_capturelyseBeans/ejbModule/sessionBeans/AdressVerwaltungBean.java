@@ -7,7 +7,6 @@ import javax.persistence.PersistenceContext;
 import org.jboss.logging.Logger;
 
 import entity.Adresse;
-
 import interfaces.AdressVerwaltungInterface;
 
 
@@ -25,9 +24,11 @@ public class AdressVerwaltungBean implements AdressVerwaltungInterface{
 	   System.out.println("Adresse schon vorhanden");   
 	}
 	em.persist(adresse);
+		
 	return adresse;
     }
 
+    
     @Override
     public Adresse findAdresse(int id_adresse) {
 	return em.find(Adresse.class, id_adresse);
@@ -43,5 +44,13 @@ public class AdressVerwaltungBean implements AdressVerwaltungInterface{
 	em.merge(adresse);
 	
     }
+    
+    public void saveAdresse(Adresse adresse){
+	Adresse a = em.find(Adresse.class, adresse.getId_adresse());
+	em.refresh(a);
+    }
+
+
+    
 
 }
