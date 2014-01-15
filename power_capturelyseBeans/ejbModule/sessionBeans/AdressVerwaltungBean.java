@@ -20,7 +20,7 @@ public class AdressVerwaltungBean implements AdressVerwaltungInterface{
     
     @Override
     public Adresse addAdresse(Adresse adresse){
-	if(em.find(Adresse.class, adresse.getId_adresse()) != null){
+	if(em.find(Adresse.class, adresse.getId_adresse()) != null){   
 	   System.out.println("Adresse schon vorhanden");   
 	}
 	em.persist(adresse);
