@@ -1,13 +1,18 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +27,9 @@ public class Zaehler implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id_zaehler;
 	
+	@Column(name="zaehlername",nullable=false, length=45)
+	private String zaehlername;
+	
 	@ManyToOne
         @JoinColumn(name="id_adresse", referencedColumnName="id_adresse", nullable=false, columnDefinition="INTEGER(11)")	
         private Adresse adresse;
@@ -29,6 +37,9 @@ public class Zaehler implements Serializable{
 	@ManyToOne
         @JoinColumn(name="id_energietyp", referencedColumnName="id_energietyp", nullable=false, columnDefinition="INTEGER(11)")	
         private Energietyp energietyp;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "zaehler")
+	private Set<Verbrauch> verbrauch;
 	
 	public Zaehler(){
 	    
@@ -47,6 +58,14 @@ public class Zaehler implements Serializable{
 	    this.id_zaehler = id_zaehler;
 	}
 
+	public String getZaehlername() {
+	    return zaehlername;
+	}
+
+	public void setZaehlername(String zaehlername) {
+	    this.zaehlername = zaehlername;
+	}
+
 	public Adresse getAdresse() {
 	    return adresse;
 	}
@@ -61,6 +80,14 @@ public class Zaehler implements Serializable{
 
 	public void setEnergietyp(Energietyp energietyp) {
 	    this.energietyp = energietyp;
+	}
+
+	public Set<Verbrauch> getVerbrauch() {
+	    return verbrauch;
+	}
+
+	public void setVerbrauch(Set<Verbrauch> verbrauch) {
+	    this.verbrauch = verbrauch;
 	}
 	
 	
