@@ -38,7 +38,7 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 	public void deleteVerbrauch(Verbrauch verbrauch) {
 		em.remove(verbrauch);		
 	}
-
+ 
     @SuppressWarnings("unchecked")
     @Override
     public List<Verbrauch> getVerbraeuche(int id_zaehler) {
