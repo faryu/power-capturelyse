@@ -29,13 +29,16 @@ public class SessionBeanClient {
 
     public static void main(String[] args) throws IOException, NamingException ,ParseException {
 	
-
-    	ServiceLocator locator = new ServiceLocator();
-    	String beanName = VerbrauchVerwaltungBean.class.getSimpleName();
-
+      
+    ServiceLocator locator = new ServiceLocator();
+    
+    String beanName = VerbrauchVerwaltungBean.class.getSimpleName();
+    System.out.println("test");
+    	  
+    	  
     	remote2 = (VerbrauchVerwaltungInterface) locator.getStateless(
     		"pcl-eap", "power_capturelyseBeans", beanName,
-    		VerbrauchVerwaltungBean.class);
+    		VerbrauchVerwaltungInterface.class);
     	
     	
     	String date1 = "2014-01-01 00:00:00";
@@ -52,7 +55,7 @@ public class SessionBeanClient {
     	remote2.getVerbraeucheAuswahl(1, datumVon, datumBis);
     	
     	System.out.print("Fertig");
-/*
+	/*	
 	BufferedReader console = new BufferedReader(new InputStreamReader(
 		System.in));
 
@@ -67,16 +70,18 @@ public class SessionBeanClient {
 	remote = (SessionRemoteInterface) locator.getStateful(
 		"pcl-eap", "power_capturelyseBeans", beanName,
 		SessionRemoteInterface.class);
+		
+		*/
 	
 //	SessionRemoteInterface remote = doLookup();
 
-	if (remote.identityCheck(user, password) == false) {
+	/*if (remote.identityCheck(user, password) == false) {
 	    System.out.println("Ihr Username oder Password ist fehlerhaft");
 	} else {
 	    System.out.println("Sie haben sich erfolgreich angemeldet, ");// +remote.whoIam());
 	}
 	
-	*/	
+
 
     }
 
@@ -104,13 +109,13 @@ public class SessionBeanClient {
 	 * The module name is the JAR name of the deployed EJB without the .jar
 	 * suffix.
 	 */
-	String moduleName = "power_capturelyseBeans";
+/*	String moduleName = "power_capturelyseBeans";
 
 	/*
 	 * AS7 allows each deployment to have an (optional) distinct name. This
 	 * can be an empty string if distinct name is not specified.
 	 */
-	String distinctName = "";
+	/*String distinctName = "";
 
 	// The EJB bean implementation class name
 	String beanName = SessionBean.class.getSimpleName();
@@ -123,11 +128,12 @@ public class SessionBeanClient {
 		+ "/" + beanName + "!" + interfaceName;
 	System.out.println(name);
 	
-	/*// Create a look up string name Stateful
+	// Create a look up string name Stateful
 	String name = "ejb:" + appName + "/" + moduleName + "/" + distinctName
 		+ "/" + beanName + "!" + interfaceName + "?stateful";
 	System.out.println(name);
-	*/
+
 	return name;
+		*/
     }
 }
