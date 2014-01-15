@@ -59,13 +59,11 @@ public class SimpleClient {
 	SimpleDateFormat format1 = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
 	Date datumVon = (Date) format1.parse(date1);
 	Date datumBis = (Date) format1.parse(date2);
-	// Timestamp datumVon = new Timestamp(datum1.getTime());
-	// Timestamp datumBis = new Timestamp(datum2.getTime());
+	
 	System.out.println(datumVon);
 	System.out.println(datumBis);
 
-	// System.out.println(verbrauchsverwaltung.getVerbraeucheAuswahl(1, 1,
-	// datumVon, datumBis));
+	
 	OutputHelper.output(verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis));
 	OutputHelper.output(verbrauchsverwaltung.getVerbraeuche(1));
 	int id_user = user.getId_user();
