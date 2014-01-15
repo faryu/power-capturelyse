@@ -52,7 +52,7 @@ public class SimpleClient {
 	// Verbrauch verbrauch = new Verbrauch();
 
 	// adressverwaltung.addAdresse(adresse);
-	OutputHelper.output(userverwaltung.findUserAdresse(3));
+	OutputHelper.output(userverwaltung.findUserAdresse(2));
 
 	String date1 = "2014-01-01 00:00:00";
 	String date2 = "2014-01-10 00:00:00";
@@ -63,8 +63,9 @@ public class SimpleClient {
 	System.out.println(datumVon);
 	System.out.println(datumBis);
 
-	
+	 
 	OutputHelper.output(verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis));
+	
 	OutputHelper.output(verbrauchsverwaltung.getVerbraeuche(1));
 	int id_user = user.getId_user();
 	// System.out.println(userverwaltung.findUser(id_user));

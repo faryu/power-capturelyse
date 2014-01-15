@@ -38,7 +38,7 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 	public void deleteVerbrauch(Verbrauch verbrauch) {
 		em.remove(verbrauch);		
 	}
-
+ 
     @SuppressWarnings("unchecked")
     @Override
     public List<Verbrauch> getVerbraeuche(int id_zaehler) {
@@ -54,11 +54,12 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 //		Query query = em.createQuery("SELECT v from Verbrauch v where v.adresse.id_adresse = :id_adresse " + 
 //				"and v.energietyp.id_energietyp= :id_energietyp " + 
 //				"and (v.datum between :datumVon and :datumBis )");
+
              Query query = em.createNativeQuery("SELECT * from tb_verbrauch v where v.id_zaehler = :id_zaehler " + 		 
 		"and v.datum between :datumVon and :datumBis ");
 		query.setParameter("id_zaehler",id_zaehler );
-				query.setParameter("datumVon",datumVon );
-		query.setParameter("datumBis",datumBis );
+		query.setParameter("datumVon",datumVon );
+		query.setParameter("datumBis",datumBis );  
 		@SuppressWarnings("unchecked")
 		List<Verbrauch> resultList = query.getResultList();
 		// TODO Auto-generated method stub
