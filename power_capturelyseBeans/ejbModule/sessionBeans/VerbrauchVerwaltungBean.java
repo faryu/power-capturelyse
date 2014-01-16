@@ -2,6 +2,7 @@ package sessionBeans;
 
 import interfaces.VerbrauchVerwaltungInterface;
 
+
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +18,9 @@ import entity.Verbrauch;
 @Stateless
 public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
     
-    static Logger logger = Logger.getLogger(VerbrauchVerwaltungBean.class);
+ 
+
+	static Logger logger = Logger.getLogger(VerbrauchVerwaltungBean.class);
     
     @PersistenceContext(name="powerCapturelyseBeans")
     private EntityManager em;
@@ -72,12 +75,12 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 			@SuppressWarnings("unchecked")
 			List<Verbrauch> resultList = (List<Verbrauch>)query.getResultList();
 			
-			System.out.println(resultList.get(0).getZaehlerstand());
+		//	System.out.println(resultList.get(0).getZaehlerstand());
 			
 			
 			// TODO Auto-generated method stub
 			logger.info("Anzahl der gefundenen Verbr�uche: " + resultList.size());
-			return null;
+			return resultList;
 			//return resultList;
 
 //        Query query = em.createNativeQuery("SELECT * from tb_verbrauch v where v.id_zaehler = :id_zaehler " + 		 

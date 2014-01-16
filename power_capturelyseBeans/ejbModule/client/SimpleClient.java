@@ -1,12 +1,17 @@
 package client;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.ejb.EJB;
 import javax.naming.NamingException;
+
+import org.jboss.netty.util.internal.LinkedTransferQueue;
 
 import entity.Adresse;
 import entity.Energietyp;
@@ -14,10 +19,12 @@ import entity.User;
 import entity.Verbrauch;
 import serviceLocator.ServiceLocator;
 import sessionBeans.AdressVerwaltungBean;
+import sessionBeans.AnalyseBean;
 import sessionBeans.EnergietypVerwaltungBean;
 import sessionBeans.UserVerwaltungBean;
 import sessionBeans.VerbrauchVerwaltungBean;
 import interfaces.AdressVerwaltungInterface;
+import interfaces.AnalyseInterface;
 import interfaces.EnergietypVerwaltungInterface;
 import interfaces.UserVerwaltungInterface;
 import interfaces.VerbrauchVerwaltungInterface;
@@ -35,6 +42,9 @@ public class SimpleClient {
     
     @EJB
     private static EnergietypVerwaltungInterface energieverwaltung;
+    
+    @EJB
+    private static AnalyseInterface analyse;
 
     public static void main(String[] args) throws NamingException,
 	    ParseException {
@@ -55,6 +65,10 @@ public class SimpleClient {
 	beanName = EnergietypVerwaltungBean.class.getSimpleName();
 	energieverwaltung = (EnergietypVerwaltungInterface) locator4.getStateless("pcl-eap", "power_capturelyseBeans", beanName, EnergietypVerwaltungInterface.class);
 
+	ServiceLocator locator5 = new ServiceLocator();
+	beanName = AnalyseBean.class.getSimpleName();
+	analyse = (AnalyseInterface) locator5.getStateless("pcl-eap", "power_capturelyseBeans", beanName, AnalyseInterface.class);
+	
 	
 	// User user = new User("Gouders", "Steffi", "steff", "h1411893");
 	User user = new User();
@@ -81,11 +95,13 @@ public class SimpleClient {
 	
 	//OutputHelper.output(verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis));
 	//energieverwaltung.showEnergietypen();
-	verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis);
 	
-   
 	
-	OutputHelper.output(verbrauchsverwaltung.getVerbraeuche(1));
+	//BigDecimal innn = analyse.mittlererVerbrauch(verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis));
+	System.out.println(verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis).get(0).getZaehlerstand());
+
+	
+	//OutputHelper.output(verbrauchsverwaltung.getVerbraeuche(1));
 	int id_user = user.getId_user();
 	// System.out.println(userverwaltung.findUser(id_user));
 
