@@ -66,15 +66,6 @@ public class Adresse implements Serializable{
 	    	    
 	}
 	
-	public Adresse(String strasse, int plz, String ort){	    
-	    this.strasse = strasse;
-	    this.plz = plz;
-	    this.ort = ort;
-	    user.getAdresse().add(this);
-	    
-	    	    
-	}
-	
 	public int getId_adresse() {
 		return id_adresse;
 	}

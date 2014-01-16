@@ -1,6 +1,7 @@
 package de.whs.mwa.pcl.rs;
 
 import interfaces.AdressVerwaltungInterface;
+import interfaces.EnergietypVerwaltungInterface;
 
 import java.util.Set;
 
@@ -19,11 +20,15 @@ import com.googlecode.htmleasy.View;
 import com.googlecode.htmleasy.ViewWith;
 
 import entity.Adresse;
+import entity.Zaehler;
 
 @Path("/address")
 public class AddressResource {
 	@EJB
 	private AdressVerwaltungInterface adressverwaltung;
+	
+	@EJB
+	EnergietypVerwaltungInterface energieTypVerwaltung;
 	
 	@GET
 	@Path("/new")
@@ -72,5 +77,32 @@ public class AddressResource {
 			throw new RedirectException("/home");
 		
 		return adresse;
+	}
+
+	@GET
+	@Path("/{aid}/add_meter")
+	@ViewWith("/meter_register.jsp")
+	public Meter create(@PathParam("aid") int aid, @Context HttpServletRequest request) {
+		HomeResource.currentUser(request);
+		Meter meter = new Meter();
+		meter.setAid(aid);
+		meter.setEnergieTypVerwaltung(energieTypVerwaltung);
+		return meter;
+	}
+
+	@POST
+	@Path("/{aid}/add_meter")
+	@ViewWith("/meter_register.jsp")
+	public Meter create(@Form Meter meter, @PathParam("aid") int aid, @Context HttpServletRequest request) {
+		entity.User user = HomeResource.currentUser(request);
+
+		if (meter.getName().length() < 4)
+			meter.addError("name", "Muss mindestens 4 Zeichen lang sein");
+		if (meter.errors == null) {
+			Zaehler zaehler = new Zaehler();
+			// Zähler hinzufügen
+			throw new RedirectException("/meter/");
+		}
+		return meter;
 	}
 }
