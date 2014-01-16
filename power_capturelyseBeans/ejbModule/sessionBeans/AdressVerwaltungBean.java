@@ -24,6 +24,8 @@ public class AdressVerwaltungBean implements AdressVerwaltungInterface{
 	   System.out.println("Adresse schon vorhanden");   
 	}
 	em.persist(adresse);
+	em.flush();
+	em.refresh(adresse);
 		
 	return adresse;
     }
@@ -45,10 +47,7 @@ public class AdressVerwaltungBean implements AdressVerwaltungInterface{
 	
     }
     
-    public void saveAdresse(Adresse adresse){
-	Adresse a = em.find(Adresse.class, adresse.getId_adresse());
-	em.refresh(a);
-    }
+   
 
 
     

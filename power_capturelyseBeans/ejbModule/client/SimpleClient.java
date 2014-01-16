@@ -89,7 +89,7 @@ public class SimpleClient {
 	// adressverwaltung.addAdresse(adresse);
 //	OutputHelper.output(userverwaltung.findUserAdresse(2));
 
-	String date1 = "2014-01-01 00:00:00";
+	String date1 = "2014-01-16 00:00:00";
 	String date2 = "2014-01-16 00:00:00";
 	SimpleDateFormat format1 = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
 	Date datumVon = (Date) format1.parse(date1);
@@ -101,6 +101,8 @@ public class SimpleClient {
 	System.out.println("Test");
 	
 	wetter.showWetterPlz(12345);
+	wetter.showWetterAuswahl(12345, datumVon, datumBis);
+	
 
 	 
 	

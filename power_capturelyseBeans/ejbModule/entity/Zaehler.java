@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -42,6 +43,7 @@ public class Zaehler implements Serializable{
 	private Set<Verbrauch> verbrauch;
 	
 	public Zaehler(){
+	    verbrauch = new HashSet<Verbrauch>();
 	    
 	}
 	

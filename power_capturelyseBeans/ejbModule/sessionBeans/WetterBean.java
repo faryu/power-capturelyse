@@ -4,6 +4,7 @@ import helper.WetterOpenWAPI;
 import interfaces.WetterTimerInterface;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -110,13 +111,43 @@ public class WetterBean implements WetterTimerInterface, Serializable
 		query.setParameter("plz",plz );
 		@SuppressWarnings("unchecked")
 		List<Wetter> resultList = (List<Wetter>)query.getResultList();
-		for(Wetter wetter : resultList){
-		    System.out.println(wetter.getPlz() +" " + wetter.getDatum()+ " " + wetter.getTemp());
+		if(resultList.size() > 0){
+		    for(Wetter wetter : resultList){
+		   	System.out.println(wetter.getPlz() +" " + wetter.getDatum()+ " " + wetter.getTemp());
+		    }
+		}else{
+		    System.out.println("ResultList ist leer. Keine Werte vorhanden");
 		}
 					
 		
 		// TODO Auto-generated method stub
-		logger.info("Anzahl der gefundener Wetter für PLZ: "+ plz + resultList.size());
+		logger.info("Anzahl der gefundener Wetter für PLZ: "+ plz + "->" + resultList.size());
+		return resultList;
+	}
+	
+	
+	
+	public List<Wetter> showWetterAuswahl(int plz, Date datumVon, Date datumBis) {
+
+	    	Timestamp datumVonNew = new Timestamp(datumVon.getTime());
+	    	Timestamp datumBisNew = new Timestamp(datumBis.getTime());
+		Query query = em.createQuery("SELECT w from Wetter w where w.plz =:plz and (w.datum between :datumVonNew and :datumBisNew)");
+		query.setParameter("plz",plz );
+		query.setParameter("datumVonNew",datumVonNew );
+		query.setParameter("datumBisNew",datumBisNew );
+		@SuppressWarnings("unchecked")
+		List<Wetter> resultList = (List<Wetter>)query.getResultList();
+		if(resultList.size() > 0){
+		    for(Wetter wetter : resultList){
+			System.out.println(wetter.getPlz() +" " + wetter.getDatum()+ " " + wetter.getTemp());
+		    }
+		}else{
+		    System.out.println("ResultList ist leer. Keine Werte vorhanden");
+		}
+					
+		
+		// TODO Auto-generated method stub
+		logger.info("Anzahl der gefundener Wetter für PLZ: "+ plz + "->" + resultList.size());
 		return resultList;
 	}
 }

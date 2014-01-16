@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -37,6 +38,8 @@ public class Energietyp implements Serializable{
     
 
     public Energietyp(){
+	
+	zaehler = new HashSet<Zaehler>();
 	
 	}
     
