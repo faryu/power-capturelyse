@@ -88,7 +88,9 @@ public class Zaehler implements Serializable{
 
 	public void setVerbrauch(Set<Verbrauch> verbrauch) {
 	    this.verbrauch = verbrauch;
+
 	}
 	
 	
 }
+
