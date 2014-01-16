@@ -13,5 +13,5 @@ public interface EnergietypVerwaltungInterface {
 	public void updateEnergietyp(Energietyp energietyp);
 	public List<Energietyp> showEnergietypen();
 	public void deleteEnergietyp(Energietyp energietyp);
-
+	public Energietyp find(int id);
 }

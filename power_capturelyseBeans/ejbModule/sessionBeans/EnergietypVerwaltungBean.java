@@ -46,4 +46,9 @@ public class EnergietypVerwaltungBean implements EnergietypVerwaltungInterface{
 		
 	}
 
+	@Override
+	public Energietyp find(int id) {
+		return em.find(Energietyp.class, id);
+	}
+
 }
