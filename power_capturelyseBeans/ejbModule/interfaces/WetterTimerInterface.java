@@ -13,4 +13,5 @@ public interface WetterTimerInterface {
 	public void stopTimer(String timerName);
 	public String showTimer();
 	public List<Wetter> showWetterPlz(int plz);
+	
 }
