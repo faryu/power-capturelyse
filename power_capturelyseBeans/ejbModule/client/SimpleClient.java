@@ -1,6 +1,7 @@
 package client;
 
 import java.util.Date;
+import java.util.List;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -8,6 +9,7 @@ import javax.ejb.EJB;
 import javax.naming.NamingException;
 
 import entity.Adresse;
+import entity.Energietyp;
 import entity.User;
 import entity.Verbrauch;
 import serviceLocator.ServiceLocator;
@@ -76,9 +78,12 @@ public class SimpleClient {
 	System.out.println("Test");
 
 	 
+	
+	//OutputHelper.output(verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis));
+	//energieverwaltung.showEnergietypen();
 	verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis);
 	
-//	OutputHelper.output(energieverwaltung.showEnergietypen());
+   
 	
 	OutputHelper.output(verbrauchsverwaltung.getVerbraeuche(1));
 	int id_user = user.getId_user();

@@ -42,15 +42,15 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
     @SuppressWarnings("unchecked")
     @Override
     public List<Verbrauch> getVerbraeuche(int id_zaehler) {
-	Query query = em.createQuery("SELECT v.zaehlerstand, v.datum from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler");
+	Query query = em.createQuery("SELECT v from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler");
 	query.setParameter("id_zaehler", id_zaehler);
-    List<Verbrauch> resultList = query.getResultList();
+    List<Verbrauch> resultList = (List<Verbrauch>)query.getResultList();
 	logger.info("Anzahl der gefundenen Verbr�uche: " + resultList.size());
 	return resultList;
     }
 
 	@Override
-	public List<Verbrauch> getVerbraeucheAuswahl(int id_zaehler, Date datumVon, Date datumBis) {		
+	/*public List<Verbrauch> getVerbraeucheAuswahl(int id_zaehler, Date datumVon, Date datumBis) {		
 		Query query = em.createQuery("SELECT v.zaehlerstand, v.datum from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler " +  
 				"and (v.datum between :datumVon and :datumBis )");
 		query.setParameter("id_zaehler",id_zaehler );
@@ -61,6 +61,24 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 		// TODO Auto-generated method stub
 		logger.info("Anzahl der gefundenen Verbr�uche: " + resultList.size());
 		return resultList;
+		*/
+		
+		public List<Verbrauch> getVerbraeucheAuswahl(int id_zaehler, Date datumVon, Date datumBis) {		
+			Query query = em.createQuery("SELECT v from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler " +  
+					"and (v.datum between :datumVon and :datumBis )");
+			query.setParameter("id_zaehler",id_zaehler );
+			query.setParameter("datumVon",datumVon );
+			query.setParameter("datumBis",datumBis );
+			@SuppressWarnings("unchecked")
+			List<Verbrauch> resultList = (List<Verbrauch>)query.getResultList();
+			
+			System.out.println(resultList.get(0).getZaehlerstand());
+			
+			
+			// TODO Auto-generated method stub
+			logger.info("Anzahl der gefundenen Verbr�uche: " + resultList.size());
+			return null;
+			//return resultList;
 
 //        Query query = em.createNativeQuery("SELECT * from tb_verbrauch v where v.id_zaehler = :id_zaehler " + 		 
 //		"and v.datum between :datumVon and :datumBis ");
