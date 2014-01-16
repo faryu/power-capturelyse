@@ -74,7 +74,7 @@ public class SimpleClient {
 	System.out.println(datumBis);
 
 	 
-	OutputHelper.output(verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis));
+	verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis);
 	
 //	OutputHelper.output(energieverwaltung.showEnergietypen());
 	
