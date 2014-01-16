@@ -72,6 +72,8 @@ public class SimpleClient {
 	
 	System.out.println(datumVon);
 	System.out.println(datumBis);
+	
+	System.out.println("Test");
 
 	 
 	verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis);
