@@ -2,6 +2,7 @@ package de.whs.mwa.pcl.rs;
 
 import interfaces.AdressVerwaltungInterface;
 import interfaces.EnergietypVerwaltungInterface;
+import interfaces.ZaehlerVerwaltungInterface;
 
 import java.util.Set;
 
@@ -28,7 +29,10 @@ public class AddressResource {
 	private AdressVerwaltungInterface adressverwaltung;
 	
 	@EJB
-	EnergietypVerwaltungInterface energieTypVerwaltung;
+	private EnergietypVerwaltungInterface energieTypVerwaltung;
+	
+	@EJB
+	private ZaehlerVerwaltungInterface zaehlerVerwaltung;
 	
 	@GET
 	@Path("/new")
@@ -99,9 +103,16 @@ public class AddressResource {
 		if (meter.getName().length() < 4)
 			meter.addError("name", "Muss mindestens 4 Zeichen lang sein");
 		if (meter.errors == null) {
+			Adresse adresse = adressverwaltung.findAdresse(aid);
 			Zaehler zaehler = new Zaehler();
-			// Zähler hinzufügen
-			throw new RedirectException("/meter/");
+			zaehler.setZaehlername(meter.getName());
+			zaehler.setEnergietyp(energieTypVerwaltung.find(meter.getType()));
+			zaehler.setAdresse(adresse);
+			adresse.getZaehler().add(zaehler);
+			
+			zaehler = zaehlerVerwaltung.createZaehler(zaehler);
+			
+			throw new RedirectException("/meter/" + zaehler.getId_zaehler());
 		}
 		return meter;
 	}
