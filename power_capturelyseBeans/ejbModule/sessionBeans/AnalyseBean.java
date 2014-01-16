@@ -22,8 +22,11 @@ public class AnalyseBean implements AnalyseInterface {
 
 	@Override
 	public BigDecimal mittlereTemperatur(List<Wetter> wetterdaten) {
+	    	System.out.println(wetterdaten.get(1).getTemp());
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 
 }

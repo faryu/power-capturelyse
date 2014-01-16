@@ -134,9 +134,10 @@ public class WetterBean implements WetterTimerInterface, Serializable
 		Query query = em.createQuery("SELECT w from Wetter w where w.plz =:plz and (w.datum between :datumVonNew and :datumBisNew)");
 		query.setParameter("plz",plz );
 		query.setParameter("datumVonNew",datumVonNew );
-		query.setParameter("datumBisNew",datumBisNew );
+		query.setParameter("datumBisNew",datumBisNew );		
 		@SuppressWarnings("unchecked")
 		List<Wetter> resultList = (List<Wetter>)query.getResultList();
+		System.out.println("DatumVonNew: " + datumVonNew + " DatumBisNew: " + datumBisNew);
 		if(resultList.size() > 0){
 		    for(Wetter wetter : resultList){
 			System.out.println(wetter.getPlz() +" " + wetter.getDatum()+ " " + wetter.getTemp());
@@ -149,5 +150,31 @@ public class WetterBean implements WetterTimerInterface, Serializable
 		// TODO Auto-generated method stub
 		logger.info("Anzahl der gefundener Wetter für PLZ: "+ plz + "->" + resultList.size());
 		return resultList;
+	}
+	
+	
+	public double showWetterAVG(int plz, Date datumVon, Date datumBis) {
+
+	    	Timestamp datumVonNew = new Timestamp(datumVon.getTime());
+	    	Timestamp datumBisNew = new Timestamp(datumBis.getTime());
+		Query query = em.createQuery("SELECT avg(w.temp)as avg from Wetter w where w.plz =:plz and (w.datum between :datumVonNew and :datumBisNew)");
+		query.setParameter("plz",plz );
+		query.setParameter("datumVonNew",datumVonNew );
+		query.setParameter("datumBisNew",datumBisNew );
+		double wert = (Double) query.getSingleResult();
+//		@SuppressWarnings("unchecked")
+//		List<Wetter> resultList = (List<Wetter>)query.getResultList();
+//		if(resultList.size() > 0){
+//		    for(Wetter wetter : resultList){
+//			System.out.println(wetter.getPlz() +" " + wetter.getDatum()+ " " + wetter.getTemp());
+//		    }
+//		}else{
+//		    System.out.println("ResultList ist leer. Keine Werte vorhanden");
+//		}
+					
+		
+		// TODO Auto-generated method stub
+		logger.info("AVG für PLZ: "+ plz + "->" + wert);
+		return wert;
 	}
 }

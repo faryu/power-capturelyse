@@ -15,5 +15,6 @@ public interface WetterTimerInterface {
 	public String showTimer();
 	public List<Wetter> showWetterPlz(int plz);
 	public List<Wetter> showWetterAuswahl(int plz, Date datumVon, Date datumBis);
+	public double showWetterAVG(int plz, Date datumVon, Date datumBis);
 	
 }

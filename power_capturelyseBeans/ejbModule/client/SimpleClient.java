@@ -89,8 +89,8 @@ public class SimpleClient {
 	// adressverwaltung.addAdresse(adresse);
 //	OutputHelper.output(userverwaltung.findUserAdresse(2));
 
-	String date1 = "2014-01-16 00:00:00";
-	String date2 = "2014-01-16 00:00:00";
+	String date1 = "2014-01-16 16:20:00";
+	String date2 = "2014-01-16 20:10:00";
 	SimpleDateFormat format1 = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
 	Date datumVon = (Date) format1.parse(date1);
 	Date datumBis = (Date) format1.parse(date2);
@@ -104,7 +104,8 @@ public class SimpleClient {
 	wetter.showWetterAuswahl(12345, datumVon, datumBis);
 	
 
-	 
+	analyse.mittlereTemperatur(wetter.showWetterAuswahl(12345, datumVon, datumBis));
+	wetter.showWetterAVG(12345, datumVon, datumBis);
 	
 	//OutputHelper.output(verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis));
 	//energieverwaltung.showEnergietypen();
