@@ -12,7 +12,7 @@
 </head>
 <body>
 <h2>Zähler</h3>
-<h3>${model.zaehlername} (${model.energietyp.energietyp} [${model.energietyp.einheit}])</h3>
+<h3>${model.zaehlername} (${model.energietyp.energietyp} [${model.energietyp.einheit}])</h3> <p><a href="/pcl-web/meter/${model.id_zaehler}/analyse">Zur Analyse</a></p>
 <p>
 <form method="post" action="/pcl-web/meter/${model.id_zaehler}/add_reading">
 Der Zählerstand <input type="text" name="reading" /> wurde am 
