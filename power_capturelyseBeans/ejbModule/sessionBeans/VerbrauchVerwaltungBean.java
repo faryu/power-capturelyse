@@ -60,7 +60,10 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 		List<Verbrauch> resultList = query.getResultList();
 		// TODO Auto-generated method stub
 		logger.info("Anzahl der gefundenen Verbr�uche: " + resultList.size());
+	
 		return resultList;
+		
+
 
 //        Query query = em.createNativeQuery("SELECT * from tb_verbrauch v where v.id_zaehler = :id_zaehler " + 		 
 //		"and v.datum between :datumVon and :datumBis ");
