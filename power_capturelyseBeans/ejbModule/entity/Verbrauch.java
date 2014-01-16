@@ -51,7 +51,7 @@ public class Verbrauch implements Serializable{
 	
     }
     
-    public Verbrauch(BigDecimal zaehlerstand, Timestamp datum){		
+    public Verbrauch(BigDecimal zaehlerstand, Date datum){		
 	this.datum = datum;
 	this.zaehlerstand = zaehlerstand;	
     }
@@ -85,7 +85,7 @@ public class Verbrauch implements Serializable{
         return datum;
     }
     
-    public void setDatum(Timestamp datum) {
+    public void setDatum(Date datum) {
         this.datum = datum;
     }
     

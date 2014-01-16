@@ -2,7 +2,7 @@ package sessionBeans;
 
 import interfaces.VerbrauchVerwaltungInterface;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -38,7 +38,7 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 	public void deleteVerbrauch(Verbrauch verbrauch) {
 		em.remove(verbrauch);		
 	}
-
+ 
     @SuppressWarnings("unchecked")
     @Override
     public List<Verbrauch> getVerbraeuche(int id_zaehler) {
@@ -61,6 +61,18 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 		// TODO Auto-generated method stub
 		logger.info("Anzahl der gefundenen Verbr�uche: " + resultList.size());
 		return resultList;
+
+//        Query query = em.createNativeQuery("SELECT * from tb_verbrauch v where v.id_zaehler = :id_zaehler " + 		 
+//		"and v.datum between :datumVon and :datumBis ");
+//		query.setParameter("id_zaehler",id_zaehler );
+//		query.setParameter("datumVon",datumVon );
+//		query.setParameter("datumBis",datumBis );  
+//		@SuppressWarnings("unchecked")
+//		List<Verbrauch> resultList = query.getResultList();
+//		// TODO Auto-generated method stub
+//		logger.info("Anzahl der gefundenen Verbr�uche: " + resultList.size());
+//		return resultList;
+		
 	}
 
 	

@@ -8,5 +8,6 @@ public interface ServiceLocatorInterface {
     
     public UserVerwaltungInterface getUserVerwaltung();
     public VerbrauchVerwaltungInterface getVerbrauchVerwaltung();
+    
 
 }
