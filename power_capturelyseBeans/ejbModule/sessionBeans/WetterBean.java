@@ -3,7 +3,9 @@ package sessionBeans;
 import helper.WetterOpenWAPI;
 import interfaces.WetterTimerInterface;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -15,12 +17,23 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.jboss.logging.Logger;
+
+import entity.Verbrauch;
 import entity.Wetter;
 
 
 @Stateless
-public class WetterBean implements WetterTimerInterface
+public class WetterBean implements WetterTimerInterface, Serializable
 {	
+    
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 2083346131132684186L;
+
+    static Logger logger = Logger.getLogger(WetterBean.class);
+    
 	@Resource
 	private TimerService timerService;
 	
@@ -37,10 +50,10 @@ public class WetterBean implements WetterTimerInterface
 	}
 	
 	@Timeout
-	void timeOutHandler(Timer timer) // ohne Modifier Zugriff für Klasse und Package
+	void timeOutHandler(Timer timer) // ohne Modifier Zugriff fï¿½r Klasse und Package
 	{
 		System.out.println("timeoutHandler : " + timer.getInfo());		
-		List<Wetter> wetterdaten = WetterOpenWAPI.abfrageStarten(getPLZ()); // Abfrage der Wetterdaten für alle PLZ		
+		List<Wetter> wetterdaten = WetterOpenWAPI.abfrageStarten(getPLZ()); // Abfrage der Wetterdaten fï¿½r alle PLZ		
 		saveWetter(wetterdaten); // Speichern der gelieferten Daten
 	}
 
@@ -65,8 +78,8 @@ public class WetterBean implements WetterTimerInterface
 		for(Object obj : timerService.getTimers()) 
 		{
 			Timer t = (Timer)obj;
-        	//System.out.println("Name: "+t.getInfo()+", Nächste Ausführung: "+t.getNextTimeout()+", Intervall: "+t.getSchedule());			
-        	timers+=("Name: "+t.getInfo()+", Nächste Ausführung: "+t.getNextTimeout()+", Zeit bis zur nächsten Ausführung "+t.getTimeRemaining()/1000+" Sekunden\n");
+        	//System.out.println("Name: "+t.getInfo()+", Nï¿½chste Ausfï¿½hrung: "+t.getNextTimeout()+", Intervall: "+t.getSchedule());			
+        	timers+=("Name: "+t.getInfo()+", Nï¿½chste Ausfï¿½hrung: "+t.getNextTimeout()+", Zeit bis zur nï¿½chsten Ausfï¿½hrung "+t.getTimeRemaining()/1000+" Sekunden\n");
 	    }
 		return timers;
 	}
@@ -89,4 +102,21 @@ public class WetterBean implements WetterTimerInterface
     	for (Wetter wetter:alleWetterdaten)
     		em.persist(wetter);
     }
+	
+	
+	
+	public List<Wetter> showWetterPlz(int plz) {		
+		Query query = em.createQuery("SELECT w from Wetter w where w.plz =:plz ");
+		query.setParameter("plz",plz );
+		@SuppressWarnings("unchecked")
+		List<Wetter> resultList = (List<Wetter>)query.getResultList();
+		for(Wetter wetter : resultList){
+		    System.out.println(wetter.getPlz() +" " + wetter.getDatum()+ " " + wetter.getTemp());
+		}
+					
+		
+		// TODO Auto-generated method stub
+		logger.info("Anzahl der gefundener Wetter fÃ¼r PLZ: "+ plz + resultList.size());
+		return resultList;
+	}
 }

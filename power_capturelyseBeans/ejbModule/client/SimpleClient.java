@@ -23,11 +23,13 @@ import sessionBeans.AnalyseBean;
 import sessionBeans.EnergietypVerwaltungBean;
 import sessionBeans.UserVerwaltungBean;
 import sessionBeans.VerbrauchVerwaltungBean;
+import sessionBeans.WetterBean;
 import interfaces.AdressVerwaltungInterface;
 import interfaces.AnalyseInterface;
 import interfaces.EnergietypVerwaltungInterface;
 import interfaces.UserVerwaltungInterface;
 import interfaces.VerbrauchVerwaltungInterface;
+import interfaces.WetterTimerInterface;
 
 public class SimpleClient {
 
@@ -45,6 +47,9 @@ public class SimpleClient {
     
     @EJB
     private static AnalyseInterface analyse;
+    
+    @EJB
+    private static WetterTimerInterface wetter;
 
     public static void main(String[] args) throws NamingException,
 	    ParseException {
@@ -70,6 +75,10 @@ public class SimpleClient {
 	analyse = (AnalyseInterface) locator5.getStateless("pcl-eap", "power_capturelyseBeans", beanName, AnalyseInterface.class);
 	
 	
+	ServiceLocator locator6 = new ServiceLocator();
+	beanName = WetterBean.class.getSimpleName();
+	wetter = (WetterTimerInterface) locator6.getStateless("pcl-eap", "power_capturelyseBeans", beanName, WetterTimerInterface.class);
+	
 	// User user = new User("Gouders", "Steffi", "steff", "h1411893");
 	User user = new User();
 	// user = userverwaltung.createUser(user);
@@ -78,10 +87,10 @@ public class SimpleClient {
 	// Verbrauch verbrauch = new Verbrauch();
 
 	// adressverwaltung.addAdresse(adresse);
-	OutputHelper.output(userverwaltung.findUserAdresse(2));
+//	OutputHelper.output(userverwaltung.findUserAdresse(2));
 
 	String date1 = "2014-01-01 00:00:00";
-	String date2 = "2014-01-10 00:00:00";
+	String date2 = "2014-01-16 00:00:00";
 	SimpleDateFormat format1 = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
 	Date datumVon = (Date) format1.parse(date1);
 	Date datumBis = (Date) format1.parse(date2);
@@ -90,6 +99,8 @@ public class SimpleClient {
 	System.out.println(datumBis);
 	
 	System.out.println("Test");
+	
+	wetter.showWetterPlz(12345);
 
 	 
 	
@@ -98,15 +109,15 @@ public class SimpleClient {
 	
 	
 	//BigDecimal innn = analyse.mittlererVerbrauch(verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis));
-	System.out.println(verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis).get(0).getZaehlerstand());
+//	System.out.println(verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis).get(0).getZaehlerstand());
 
-	System.out.println(verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis).get(0).getZaehlerstand());
+//	System.out.println(verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis).get(0).getZaehlerstand());
 	//OutputHelper.output(verbrauchsverwaltung.getVerbraeuche(1));
-	int id_user = user.getId_user();
+//	int id_user = user.getId_user();
 	// System.out.println(userverwaltung.findUser(id_user));
 
 	
-	System.out.println(id_user);
+//	System.out.println(id_user);
 
     }
 

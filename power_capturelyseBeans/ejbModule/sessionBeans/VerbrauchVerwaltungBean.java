@@ -48,7 +48,7 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 	Query query = em.createQuery("SELECT v from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler");
 	query.setParameter("id_zaehler", id_zaehler);
     List<Verbrauch> resultList = (List<Verbrauch>)query.getResultList();
-	logger.info("Anzahl der gefundenen Verbr�uche: " + resultList.size());
+	logger.info("Anzahl der gefundenen Verbraeuche: " + resultList.size());
 	return resultList;
     }
 
@@ -62,7 +62,7 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 		@SuppressWarnings("unchecked")
 		List<Verbrauch> resultList = query.getResultList();
 		// TODO Auto-generated method stub
-		logger.info("Anzahl der gefundenen Verbr�uche: " + resultList.size());
+		logger.info("Anzahl der gefundenen Verbraeuche: " + resultList.size());
 		return resultList;
 		*/
 		
@@ -79,7 +79,7 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 			
 			
 			// TODO Auto-generated method stub
-			logger.info("Anzahl der gefundenen Verbr�uche: " + resultList.size());
+			logger.info("Anzahl der gefundenen Verbraeuche: " + resultList.size());
 			return resultList;
 			//return resultList;
 
