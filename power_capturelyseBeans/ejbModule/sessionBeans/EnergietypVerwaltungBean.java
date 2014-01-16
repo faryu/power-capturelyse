@@ -1,7 +1,10 @@
 package sessionBeans;
 
+import interfaces.EnergietypVerwaltungInterface;
+
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -9,8 +12,8 @@ import javax.persistence.Query;
 import org.jboss.logging.Logger;
 
 import entity.Energietyp;
-import interfaces.EnergietypVerwaltungInterface;
 
+@Stateless
 public class EnergietypVerwaltungBean implements EnergietypVerwaltungInterface{
 
 	static Logger logger = Logger.getLogger(EnergietypVerwaltungBean.class);
@@ -32,8 +35,7 @@ public class EnergietypVerwaltungBean implements EnergietypVerwaltungInterface{
 
 	@Override
 	public List<Energietyp> showEnergietypen() {
-		Query query = em.createQuery("SELECT e.energietypen, e.einheit FROM Energietypen");
-		@SuppressWarnings("unchecked")
+		Query query = em.createQuery("SELECT e.energietypen, e.einheit FROM Energietypen e");
 		List<Energietyp> resultList = query.getResultList();		
 		return resultList;
 	}
