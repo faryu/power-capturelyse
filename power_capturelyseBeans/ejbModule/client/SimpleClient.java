@@ -51,7 +51,7 @@ public class SimpleClient {
 	
 	ServiceLocator locator4 = new ServiceLocator();
 	beanName = EnergietypVerwaltungBean.class.getSimpleName();
-	energieverwaltung = (EnergietypVerwaltungInterface) locator3.getStateless("pcl-eap", "power_capturelyseBeans", beanName, EnergietypVerwaltungInterface.class);
+	energieverwaltung = (EnergietypVerwaltungInterface) locator4.getStateless("pcl-eap", "power_capturelyseBeans", beanName, EnergietypVerwaltungInterface.class);
 
 	
 	// User user = new User("Gouders", "Steffi", "steff", "h1411893");

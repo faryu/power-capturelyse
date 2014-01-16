@@ -51,7 +51,7 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 
 	@Override
 	public List<Verbrauch> getVerbraeucheAuswahl(int id_zaehler, Date datumVon, Date datumBis) {		
-		Query query = em.createQuery("SELECT v from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler " +  
+		Query query = em.createQuery("SELECT v.zaehlerstand, v.datum from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler " +  
 				"and (v.datum between :datumVon and :datumBis )");
 		query.setParameter("id_zaehler",id_zaehler );
 		query.setParameter("datumVon",datumVon );
