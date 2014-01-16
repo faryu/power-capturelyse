@@ -9,5 +9,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="jars/jboss-client.jar"/>
+	<classpathentry kind="lib" path="jars/hibernate-core-4.3.0.Final.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
