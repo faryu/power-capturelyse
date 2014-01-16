@@ -100,7 +100,7 @@ public class SimpleClient {
 	//BigDecimal innn = analyse.mittlererVerbrauch(verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis));
 	System.out.println(verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis).get(0).getZaehlerstand());
 
-	
+	System.out.println(verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis).get(0).getZaehlerstand());
 	//OutputHelper.output(verbrauchsverwaltung.getVerbraeuche(1));
 	int id_user = user.getId_user();
 	// System.out.println(userverwaltung.findUser(id_user));
