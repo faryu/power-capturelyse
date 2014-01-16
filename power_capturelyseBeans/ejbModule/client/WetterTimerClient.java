@@ -25,7 +25,7 @@ public class WetterTimerClient
 						
 		do
 		{
-			System.out.println("Bitte w�hlen (0=Ende):");
+			System.out.println("Bitte waehlen (0=Ende):");
 			System.out.println("1 - Timer anzeigen");
 			System.out.println("2 - Timer beenden");
 			System.out.println("3 - Timer erstellen");
@@ -55,9 +55,9 @@ public class WetterTimerClient
 				}
 				case 3:
 				{
-					System.out.println("Bitte geben Sie einen Namen f�r den Timer ein: ");					
+					System.out.println("Bitte geben Sie einen Namen fuer den Timer ein: ");					
 					String name = console.readLine();
-					System.out.println("Bitte geben Sie einen Intervall f�r den Timer ein (Sekunden): ");					
+					System.out.println("Bitte geben Sie einen Intervall fuer den Timer ein (Sekunden): ");					
 					String intervall = console.readLine();					
 					wetterRemote.createTimer(Long.parseLong(intervall)*1000, name);
 					break;
