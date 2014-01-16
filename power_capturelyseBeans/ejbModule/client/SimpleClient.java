@@ -12,9 +12,11 @@ import entity.User;
 import entity.Verbrauch;
 import serviceLocator.ServiceLocator;
 import sessionBeans.AdressVerwaltungBean;
+import sessionBeans.EnergietypVerwaltungBean;
 import sessionBeans.UserVerwaltungBean;
 import sessionBeans.VerbrauchVerwaltungBean;
 import interfaces.AdressVerwaltungInterface;
+import interfaces.EnergietypVerwaltungInterface;
 import interfaces.UserVerwaltungInterface;
 import interfaces.VerbrauchVerwaltungInterface;
 
@@ -28,6 +30,9 @@ public class SimpleClient {
 
     @EJB
     private static AdressVerwaltungInterface adressverwaltung;
+    
+    @EJB
+    private static EnergietypVerwaltungInterface energieverwaltung;
 
     public static void main(String[] args) throws NamingException,
 	    ParseException {
@@ -43,7 +48,12 @@ public class SimpleClient {
 	ServiceLocator locator3 = new ServiceLocator();
 	beanName = AdressVerwaltungBean.class.getSimpleName();
 	adressverwaltung = (AdressVerwaltungInterface) locator3.getStateless("pcl-eap", "power_capturelyseBeans", beanName, AdressVerwaltungInterface.class);
+	
+	ServiceLocator locator4 = new ServiceLocator();
+	beanName = EnergietypVerwaltungBean.class.getSimpleName();
+	energieverwaltung = (EnergietypVerwaltungInterface) locator3.getStateless("pcl-eap", "power_capturelyseBeans", beanName, EnergietypVerwaltungInterface.class);
 
+	
 	// User user = new User("Gouders", "Steffi", "steff", "h1411893");
 	User user = new User();
 	// user = userverwaltung.createUser(user);
@@ -65,6 +75,8 @@ public class SimpleClient {
 
 	 
 	OutputHelper.output(verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis));
+	
+//	OutputHelper.output(energieverwaltung.showEnergietypen());
 	
 	OutputHelper.output(verbrauchsverwaltung.getVerbraeuche(1));
 	int id_user = user.getId_user();
