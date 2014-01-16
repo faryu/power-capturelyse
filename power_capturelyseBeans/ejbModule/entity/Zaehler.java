@@ -1,13 +1,17 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,4 +33,34 @@ public class Zaehler implements Serializable{
 	@ManyToOne
     @JoinColumn(name="id_energietyp", referencedColumnName="id_energietyp", nullable=false, columnDefinition="INTEGER(11)")	
     private Energietyp energietyp;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "zaehler")
+    private Set<Verbrauch> verbrauch;
+
+	public int getId_zaehler() {
+		return id_zaehler;
+	}
+
+	public void setId_zaehler(int id_zaehler) {
+		this.id_zaehler = id_zaehler;
+	}
+
+	public Adresse getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
+
+	public Energietyp getEnergietyp() {
+		return energietyp;
+	}
+
+	public void setEnergietyp(Energietyp energietyp) {
+		this.energietyp = energietyp;
+	}
+	
+	
 }
+
