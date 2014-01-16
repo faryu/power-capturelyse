@@ -10,6 +10,7 @@
 <h1>Power Capturelyse</h1>
 <a href="/pcl-web/user/register">Registrierung</a><br>
 <a href="/pcl-web/user/login">Login</a><br>
-<a href="/pcl-web/home">Home</a>
+<a href="/pcl-web/home">Home</a><br>
+<a href="/pcl-web/type">Energietypen</a>
 </body>
 </html>

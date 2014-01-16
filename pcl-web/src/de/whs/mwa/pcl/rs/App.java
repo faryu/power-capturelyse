@@ -16,9 +16,11 @@ public class App extends Application {
 		classes = new HashSet<Class<?>>();
 		
 		singletons.add(new Test());
-		classes.add(UserResource.class);
-		classes.add(HomeResource.class);
 		classes.add(AddressResource.class);
+		classes.add(EnergyTypeResource.class);
+		classes.add(MeterResource.class);
+		classes.add(HomeResource.class);
+		classes.add(UserResource.class);
 		
 		classes.addAll(HtmleasyProviders.getClasses());
 	}
