@@ -32,7 +32,7 @@ public class EnergietypVerwaltungBean implements EnergietypVerwaltungInterface{
 
 	@Override
 	public List<Energietyp> showEnergietypen() {
-		Query query = em.createQuery("SELECT e.energietypen, e.einheiten FROM Energietypen");
+		Query query = em.createQuery("SELECT e.energietypen, e.einheit FROM Energietypen");
 		@SuppressWarnings("unchecked")
 		List<Energietyp> resultList = query.getResultList();		
 		return resultList;
