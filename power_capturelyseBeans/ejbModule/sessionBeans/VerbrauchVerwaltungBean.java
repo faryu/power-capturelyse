@@ -2,7 +2,7 @@ package sessionBeans;
 
 import interfaces.VerbrauchVerwaltungInterface;
 
-
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -48,24 +48,11 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 	Query query = em.createQuery("SELECT v from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler");
 	query.setParameter("id_zaehler", id_zaehler);
     List<Verbrauch> resultList = (List<Verbrauch>)query.getResultList();
-	logger.info("Anzahl der gefundenen Verbraeuche: " + resultList.size());
+	logger.info("******* Anzahl der gefundenen getVerbraeuche(): " + resultList.size()+" *******");
 	return resultList;
     }
 
-	@Override
-	/*public List<Verbrauch> getVerbraeucheAuswahl(int id_zaehler, Date datumVon, Date datumBis) {		
-		Query query = em.createQuery("SELECT v.zaehlerstand, v.datum from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler " +  
-				"and (v.datum between :datumVon and :datumBis )");
-		query.setParameter("id_zaehler",id_zaehler );
-		query.setParameter("datumVon",datumVon );
-		query.setParameter("datumBis",datumBis );
-		@SuppressWarnings("unchecked")
-		List<Verbrauch> resultList = query.getResultList();
-		// TODO Auto-generated method stub
-		logger.info("Anzahl der gefundenen Verbraeuche: " + resultList.size());
-		return resultList;
-		*/
-		
+	@Override	
 		public List<Verbrauch> getVerbraeucheAuswahl(int id_zaehler, Date datumVon, Date datumBis) {		
 			Query query = em.createQuery("SELECT v from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler " +  
 					"and (v.datum between :datumVon and :datumBis )");
@@ -79,21 +66,26 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 			
 			
 			// TODO Auto-generated method stub
-			logger.info("Anzahl der gefundenen Verbraeuche: " + resultList.size());
+			logger.info("********* Anzahl der gefundenen getVerbraeucheAuswahl(): " + resultList.size()+ " *******");
 			return resultList;
 			//return resultList;
 
-//        Query query = em.createNativeQuery("SELECT * from tb_verbrauch v where v.id_zaehler = :id_zaehler " + 		 
-//		"and v.datum between :datumVon and :datumBis ");
-//		query.setParameter("id_zaehler",id_zaehler );
-//		query.setParameter("datumVon",datumVon );
-//		query.setParameter("datumBis",datumBis );  
-//		@SuppressWarnings("unchecked")
-//		List<Verbrauch> resultList = query.getResultList();
-//		// TODO Auto-generated method stub
-//		logger.info("Anzahl der gefundenen Verbr�uche: " + resultList.size());
-//		return resultList;
 		
+	}
+
+	@Override
+	public Double showVerbraeucheAVG(int id_zaehler, Date datumVon,
+		Date datumBis) {
+	    Query query = em.createQuery("SELECT avg(v.zaehlerstand) from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler " +  
+			"and (v.datum between :datumVon and :datumBis )");
+	query.setParameter("id_zaehler",id_zaehler );
+	query.setParameter("datumVon",datumVon );
+	query.setParameter("datumBis",datumBis );
+	double wert = (Double) query.getSingleResult();
+	// TODO Auto-generated method stub
+	logger.info("******* AVG Verbrauch für PLZ: " + id_zaehler + "-> " + wert + " *******");
+	return wert;
+	  
 	}
 
 	

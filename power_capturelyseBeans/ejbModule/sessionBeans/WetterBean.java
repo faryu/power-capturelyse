@@ -116,12 +116,12 @@ public class WetterBean implements WetterTimerInterface, Serializable
 		   	System.out.println(wetter.getPlz() +" " + wetter.getDatum()+ " " + wetter.getTemp());
 		    }
 		}else{
-		    System.out.println("ResultList ist leer. Keine Werte vorhanden");
+		    System.out.println("+++++++++++++++ showWetterPlz(): ResultList ist leer. Keine Werte vorhanden +++++++++++++++");
 		}
 					
 		
 		// TODO Auto-generated method stub
-		logger.info("Anzahl der gefundener Wetter für PLZ: "+ plz + "->" + resultList.size());
+		logger.info("+++++++++++++++ Anzahl der gefundenen showWetterPLZ() für PLZ: "+ plz + "-> " + resultList.size()+" +++++++++++++++");
 		return resultList;
 	}
 	
@@ -140,15 +140,15 @@ public class WetterBean implements WetterTimerInterface, Serializable
 		System.out.println("DatumVonNew: " + datumVonNew + " DatumBisNew: " + datumBisNew);
 		if(resultList.size() > 0){
 		    for(Wetter wetter : resultList){
-			System.out.println(wetter.getPlz() +" " + wetter.getDatum()+ " " + wetter.getTemp());
+			System.out.println("+++++++++++++++ Werte showWetterAuswahl(): " +wetter.getPlz() + " " + wetter.getDatum()+ " " + wetter.getTemp()+ " +++++++++++++++");
 		    }
 		}else{
-		    System.out.println("ResultList ist leer. Keine Werte vorhanden");
+		    System.out.println("+++++++++++++++ showWetterAuswahl() : ResultList ist leer. Keine Werte vorhanden +++++++++++++++");
 		}
 					
 		
 		// TODO Auto-generated method stub
-		logger.info("Anzahl der gefundener Wetter für PLZ: "+ plz + "->" + resultList.size());
+		logger.info("+++++++++++++++ Anzahl der gefundenen showWetterAuswahl() für PLZ: "+ plz + "-> " + resultList.size()+" +++++++++++++++");
 		return resultList;
 	}
 	
@@ -162,19 +162,8 @@ public class WetterBean implements WetterTimerInterface, Serializable
 		query.setParameter("datumVonNew",datumVonNew );
 		query.setParameter("datumBisNew",datumBisNew );
 		double wert = (Double) query.getSingleResult();
-//		@SuppressWarnings("unchecked")
-//		List<Wetter> resultList = (List<Wetter>)query.getResultList();
-//		if(resultList.size() > 0){
-//		    for(Wetter wetter : resultList){
-//			System.out.println(wetter.getPlz() +" " + wetter.getDatum()+ " " + wetter.getTemp());
-//		    }
-//		}else{
-//		    System.out.println("ResultList ist leer. Keine Werte vorhanden");
-//		}
-					
-		
 		// TODO Auto-generated method stub
-		logger.info("AVG für PLZ: "+ plz + "->" + wert);
+		logger.info("+++++++++++++++ AVG Temperatur für PLZ: "+ plz + "-> " + wert + " +++++++++++++++");
 		return wert;
 	}
 }

@@ -17,7 +17,7 @@ public interface VerbrauchVerwaltungInterface {
 
     public List<Verbrauch> getVerbraeuche(int id_zaehler);
     public List<Verbrauch> getVerbraeucheAuswahl(int id_zaehler, Date datumVon, Date datumBis);
-    public BigDecimal showWetterAVG(int plz, Date datumVon, Date datumBis);
+    public Double showVerbraeucheAVG(int id_zaehler, Date datumVon, Date datumBis);
 
     
 
