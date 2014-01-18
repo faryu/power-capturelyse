@@ -3,8 +3,18 @@ package sessionBeans;
 import interfaces.VerbrauchVerwaltungInterface;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+
+
+
+
+
+
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -19,7 +29,6 @@ import entity.Verbrauch;
 public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
     
  
-
 	static Logger logger = Logger.getLogger(VerbrauchVerwaltungBean.class);
     
     @PersistenceContext(name="powerCapturelyseBeans")
@@ -45,49 +54,155 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
     @SuppressWarnings("unchecked")
     @Override
     public List<Verbrauch> getVerbraeuche(int id_zaehler) {
-	Query query = em.createQuery("SELECT v from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler");
-	query.setParameter("id_zaehler", id_zaehler);
-    List<Verbrauch> resultList = (List<Verbrauch>)query.getResultList();
-	logger.info("******* Anzahl der gefundenen getVerbraeuche(): " + resultList.size()+" *******");
-	return resultList;
+    	Query query = em.createQuery("SELECT v from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler ORDER BY v.datum ASC");
+    	query.setParameter("id_zaehler", id_zaehler);
+    	List<Verbrauch> resultList = (List<Verbrauch>)query.getResultList();
+    	logger.info("******* Anzahl der gefundenen getVerbraeuche(): " + resultList.size()+" *******");
+    	return resultList;
     }
 
 	@Override	
-		public List<Verbrauch> getVerbraeucheAuswahl(int id_zaehler, Date datumVon, Date datumBis) {		
-			Query query = em.createQuery("SELECT v from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler " +  
-					"and (v.datum between :datumVon and :datumBis )");
-			query.setParameter("id_zaehler",id_zaehler );
-			query.setParameter("datumVon",datumVon );
-			query.setParameter("datumBis",datumBis );
-			@SuppressWarnings("unchecked")
-			List<Verbrauch> resultList = (List<Verbrauch>)query.getResultList();
-			
-		//	System.out.println(resultList.get(0).getZaehlerstand());
-			
-			
-			// TODO Auto-generated method stub
-			logger.info("********* Anzahl der gefundenen getVerbraeucheAuswahl(): " + resultList.size()+ " *******");
-			return resultList;
-			//return resultList;
-
+	public List<Verbrauch> getVerbraeucheAuswahl(int id_zaehler, Date datumVon, Date datumBis) {		
+		Query query = em.createQuery("SELECT v from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler " +  
+					"and (v.datum between :datumVon and :datumBis ) ORDER BY v.datum ASC");
+		query.setParameter("id_zaehler",id_zaehler );
+		query.setParameter("datumVon",datumVon );
+		query.setParameter("datumBis",datumBis );
+		@SuppressWarnings("unchecked")
+		List<Verbrauch> resultList = (List<Verbrauch>)query.getResultList();
 		
-	}
-
-	@Override
-	public Double showVerbraeucheAVG(int id_zaehler, Date datumVon,
-		Date datumBis) {
-	    Query query = em.createQuery("SELECT avg(v.zaehlerstand) from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler " +  
-			"and (v.datum between :datumVon and :datumBis )");
-	query.setParameter("id_zaehler",id_zaehler );
-	query.setParameter("datumVon",datumVon );
-	query.setParameter("datumBis",datumBis );
-	double wert = (Double) query.getSingleResult();
-	// TODO Auto-generated method stub
-	logger.info("******* AVG Verbrauch für PLZ: " + id_zaehler + "-> " + wert + " *******");
-	return wert;
-	  
-	}
+					
+		// TODO Auto-generated method stub
+		logger.info("********* Anzahl der gefundenen getVerbraeucheAuswahl(): " + resultList.size()+ " *******");
+		return resultList;
+		}
 
 	
+	
+	@SuppressWarnings("deprecation")
+	public Double showGesamtVerbrauchImIntervall(int id_zaehler, Date datumVon,Date datumBis) throws ParseException
+		{ 
+		
+		Double intervalVerbrauchReturn;
+		
+		datumVon.setHours(00);
+		datumVon.setMinutes(00);
+		datumVon.setSeconds(00);
+		
+		datumBis.setHours(23);
+		datumBis.setMinutes(59);
+		datumBis.setSeconds(59);
+			
+		Query query = em.createQuery("SELECT v from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler " +  
+		"and (v.datum between :datumVon and :datumBis ) ORDER BY v.datum ASC");
+		query.setParameter("id_zaehler",id_zaehler );
+		query.setParameter("datumVon",datumVon );
+		query.setParameter("datumBis",datumBis );
+  
+		@SuppressWarnings("unchecked")
+		List<Verbrauch> resultList = (List<Verbrauch>)query.getResultList();
+    					
+		// 
+		
+		
+		String strvonDatum = resultList.get(0).getDatum().toString();
+		String strbisDatum = resultList.get(resultList.size()-1).getDatum().toString();
+				
+		SimpleDateFormat format1 = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
+				
+		Date sqlvonDatum = (Date) format1.parse(strvonDatum);
+		Date sqlbisDatum = (Date) format1.parse(strbisDatum);
+		
+		sqlvonDatum.setHours(00);
+		sqlvonDatum.setMinutes(00);
+		sqlvonDatum.setSeconds(00);
+		
+		sqlbisDatum.setHours(23);
+		sqlbisDatum.setMinutes(59);
+		sqlbisDatum.setSeconds(59);
+		
+	
+		
+		if((sqlvonDatum.compareTo(datumVon)==0) && (sqlbisDatum.compareTo(datumBis)==0))
+		{
+			System.out.println("Intervall ist vorhanden");
+			
+			Long zeitvonDatum = resultList.get(0).getDatum().getTime();
+			Long zeitbisDatum = resultList.get(1).getDatum().getTime();
+			
+			Long intervallTagAbstand = (zeitbisDatum - zeitvonDatum)/1000/60/60/24;
+			System.out.println("Tage im Intervall: "+intervallTagAbstand);
+			
+			BigDecimal zaehlerstandvonDatum = resultList.get(0).getZaehlerstand();
+			BigDecimal zaehlerstandbisDatum = resultList.get(1).getZaehlerstand();
+			
+			BigDecimal intervallVerbrauch = zaehlerstandbisDatum.subtract(zaehlerstandvonDatum);
+			
+			intervalVerbrauchReturn =intervallVerbrauch.doubleValue();
+			
+			System.out.println("Verbrauch im Intervall: "+intervalVerbrauchReturn);
+			
+	//		verbrauchProTag= intervallVerbrauch.doubleValue() / intervallTagAbstand.doubleValue();
+			
+		//	System.out.println( "Durchschnittsverbrauch pro Tag "+ verbrauchProTag);
+			
+		}
+		else
+		{
+    		System.out.println("Intervallgrenzen enthalten keinen Zaehlerstand!");
+    		return null;
+		}	
+    		
+    return intervalVerbrauchReturn;
+	}
+	
+	
+	
+	
+	
+	//K�se ermittelt keinen Mittelwert pro Tag
+	/*public Double showVerbraeucheAVG(int id_zaehler, Date datumVon,
+		Date datumBis) {
+	    Query query = em.createQuery("SELECT AVG(v.zaehlerstand) from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler " +  
+			"and (v.datum between :datumVon and :datumBis )");
+	    query.setParameter("id_zaehler",id_zaehler );
+	    query.setParameter("datumVon",datumVon );
+	    query.setParameter("datumBis",datumBis );
+		
+	    double wert = (Double) query.getSingleResult();
+	  
+	    // TODO Auto-generated method stub
+	    logger.info("******* AVG Verbrauch für PLZ: " + id_zaehler + "-> " + wert + " *******");
+	    return wert;
+		}
+		*/
 
+	@SuppressWarnings("deprecation")
+	public Double showTagesVerbrauchImIntervall(int id_zaehler, Date datumVon,Date datumBis) throws ParseException
+	{	
+		
+		Double intervallVerbrauch = showGesamtVerbrauchImIntervall(id_zaehler, datumVon, datumBis);
+		
+		datumVon.setHours(00);
+		datumVon.setMinutes(00);
+		datumVon.setSeconds(00);
+		
+		datumBis.setHours(23);
+		datumBis.setMinutes(59);
+		datumBis.setSeconds(59);
+		
+		
+		Long tagesAbstand = (datumBis.getTime() - datumVon.getTime()) /1000 /60 /60/24;
+		
+		System.out.println("Tagesabstand "+tagesAbstand);
+		
+		Double avgTagVerbrauch = intervallVerbrauch /tagesAbstand.doubleValue();
+		
+		System.out.println("AVG pro Tag "+avgTagVerbrauch);
+		
+	   return avgTagVerbrauch;
+	}
+	
+
+	
 }

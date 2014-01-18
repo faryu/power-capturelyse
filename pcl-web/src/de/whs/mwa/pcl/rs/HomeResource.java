@@ -1,7 +1,7 @@
 package de.whs.mwa.pcl.rs;
 
 import interfaces.AdressVerwaltungInterface;
-import interfaces.SessionRemoteInterface;
+import interfaces.ClientSitzungRemoteInterface;
 import interfaces.VerbrauchVerwaltungInterface;
 
 import javax.ejb.EJB;
@@ -29,7 +29,7 @@ public class HomeResource {
 	static public entity.User currentUser(HttpServletRequest request)
 	{
 		HttpSession session = request.getSession();
-		SessionRemoteInterface sessionBean = (SessionRemoteInterface) session.getAttribute("pcl-session");
+		ClientSitzungRemoteInterface sessionBean = (ClientSitzungRemoteInterface) session.getAttribute("pcl-session");
 		if(sessionBean == null)
 			throw new RedirectException("/user/login");
 		return sessionBean.getUser();

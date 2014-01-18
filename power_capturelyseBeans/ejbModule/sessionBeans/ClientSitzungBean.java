@@ -1,7 +1,7 @@
 package sessionBeans;
 
 import helper.Helper;
-import interfaces.SessionRemoteInterface;
+import interfaces.ClientSitzungRemoteInterface;
 import interfaces.UserVerwaltungInterface;
 
 import javax.ejb.EJB;
@@ -11,7 +11,7 @@ import entity.User;
 
 
 @Stateful
-public class SessionBean implements SessionRemoteInterface {
+public class ClientSitzungBean implements ClientSitzungRemoteInterface {
 
 
 	private User user;

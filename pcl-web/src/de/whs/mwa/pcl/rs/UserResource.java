@@ -2,7 +2,7 @@ package de.whs.mwa.pcl.rs;
 
 import helper.Helper;
 import interfaces.AdressVerwaltungInterface;
-import interfaces.SessionRemoteInterface;
+import interfaces.ClientSitzungRemoteInterface;
 import interfaces.UserVerwaltungInterface;
 import interfaces.VerbrauchVerwaltungInterface;
 
@@ -27,7 +27,7 @@ public class UserResource {
 	private UserVerwaltungInterface userverwaltung;
 	
 	@EJB
-	private SessionRemoteInterface sessionBean;
+	private ClientSitzungRemoteInterface sessionBean;
 
 	@GET
 	@Path("/register")

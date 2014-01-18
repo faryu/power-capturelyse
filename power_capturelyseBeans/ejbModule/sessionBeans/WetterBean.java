@@ -155,8 +155,8 @@ public class WetterBean implements WetterTimerInterface, Serializable
 	
 	public double showWetterAVG(int plz, Date datumVon, Date datumBis) {
 
-	    	Timestamp datumVonNew = new Timestamp(datumVon.getTime());
-	    	Timestamp datumBisNew = new Timestamp(datumBis.getTime());
+	    Timestamp datumVonNew = new Timestamp(datumVon.getTime());
+	    Timestamp datumBisNew = new Timestamp(datumBis.getTime());
 		Query query = em.createQuery("SELECT avg(w.temp)as avg from Wetter w where w.plz =:plz and (w.datum between :datumVonNew and :datumBisNew)");
 		query.setParameter("plz",plz );
 		query.setParameter("datumVonNew",datumVonNew );
