@@ -77,8 +77,6 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 		logger.info("********* Anzahl der gefundenen getZaehlerstaendeAuswahl(): " + resultList.size()+ " *******");
 		return resultList;
 		}
-
-	
 	
 	@SuppressWarnings("deprecation")
 	public Double showGesamtVerbrauchImIntervall(int id_zaehler, Date datumVon,Date datumBis) throws ParseException
@@ -86,24 +84,7 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 		
 		System.out.println("showGesamtVerbrauchImIntervall=======================");
 		
-//		Double intervalVerbrauchReturn;
-//		
-//		datumVon.setHours(00);
-//		datumVon.setMinutes(00);
-//		datumVon.setSeconds(00);
-//		
-//		datumBis.setHours(23);
-//		datumBis.setMinutes(59);
-//		datumBis.setSeconds(59);
-			
-		Query query = em.createQuery("SELECT v from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler " +  
-		"and (v.datum between :datumVon and :datumBis ) ORDER BY v.datum ASC");
-		query.setParameter("id_zaehler",id_zaehler );
-		query.setParameter("datumVon",datumVon );
-		query.setParameter("datumBis",datumBis );
-  
-		@SuppressWarnings("unchecked")
-		List<Verbrauch> resultList = (List<Verbrauch>)query.getResultList();
+		List<Verbrauch> resultList = getZaehlerstaendeAuswahl(id_zaehler, datumVon, datumBis);
     	if(resultList == null || resultList.isEmpty())
     		return 0.0;
     	return resultList.get(resultList.size() - 1).getZaehlerstand().doubleValue() - resultList.get(0).getZaehlerstand().doubleValue();
@@ -222,33 +203,42 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 	@SuppressWarnings("deprecation")
 	public Double showTagesVerbrauchImIntervall(int id_zaehler, Date datumVon,Date datumBis) throws ParseException
 	{	
-		System.out.println("showTagesVerbrauchImIntervall=======================");
+		List<Verbrauch> verbraeuche = getZaehlerstaendeAuswahl(id_zaehler, datumVon, datumBis);
+		if(verbraeuche == null || verbraeuche.size() < 2)
+    		return 0.0;
 		
-		if(showGesamtVerbrauchImIntervall(id_zaehler, datumVon, datumBis) != null)
-		{
-		Double intervallVerbrauch = showGesamtVerbrauchImIntervall(id_zaehler, datumVon, datumBis);
-		
-		datumVon.setHours(00);
-		datumVon.setMinutes(00);
-		datumVon.setSeconds(00);
-		
-		datumBis.setHours(23);
-		datumBis.setMinutes(59);
-		datumBis.setSeconds(59);
-		
-		
-		Long tagesAbstand = (datumBis.getTime() - datumVon.getTime()) /1000 /60 /60/24;
-		
-		System.out.println("Tagesabstand "+tagesAbstand);
-		
-		Double avgTagVerbrauch = intervallVerbrauch /tagesAbstand.doubleValue();
-		
-		System.out.println("AVG pro Tag "+avgTagVerbrauch);
-		
-	   return avgTagVerbrauch;
-	   }
-	System.out.println("Angebene Intervallgrenzen sind nicht beide in den Verbrauchsdaten vorhanden.");
-	return null;
+		Verbrauch from = verbraeuche.get(0);
+		Verbrauch to = verbraeuche.get(verbraeuche.size() - 1);
+    	double total = to.getZaehlerstand().doubleValue() - from.getZaehlerstand().doubleValue();
+		double diff = ((double)(to.getDatum().getTime() - from.getDatum().getTime())) / (1000 * 60 * 60 * 24);
+		return total / diff;
+//		System.out.println("showTagesVerbrauchImIntervall=======================");
+//		
+//		if(showGesamtVerbrauchImIntervall(id_zaehler, datumVon, datumBis) != null)
+//		{
+//		Double intervallVerbrauch = showGesamtVerbrauchImIntervall(id_zaehler, datumVon, datumBis);
+//		
+//		datumVon.setHours(00);
+//		datumVon.setMinutes(00);
+//		datumVon.setSeconds(00);
+//		
+//		datumBis.setHours(23);
+//		datumBis.setMinutes(59);
+//		datumBis.setSeconds(59);
+//		
+//		
+//		Long tagesAbstand = (datumBis.getTime() - datumVon.getTime()) /1000 /60 /60/24;
+//		
+//		System.out.println("Tagesabstand "+tagesAbstand);
+//		
+//		Double avgTagVerbrauch = intervallVerbrauch /tagesAbstand.doubleValue();
+//		
+//		System.out.println("AVG pro Tag "+avgTagVerbrauch);
+//		
+//	   return avgTagVerbrauch;
+//	   }
+//	System.out.println("Angebene Intervallgrenzen sind nicht beide in den Verbrauchsdaten vorhanden.");
+//	return null;
 	}
 	
 
