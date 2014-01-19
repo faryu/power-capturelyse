@@ -21,12 +21,12 @@ Der Zählerstand <input type="text" name="reading" /> wurde am
 <input type="submit" value="abgelesen"/>
 </form>
 </p>
-<table><tr><th>Datum</th><th>Zählerstand</th></tr>
+<table><tr><th>Datum</th><th>Zählerstand</th><th>Aktion</th></tr>
 <%
 Zaehler model = (Zaehler)request.getAttribute("model");
 for(Verbrauch v : model.getVerbrauch())
 {
-	%><tr><td><%=v.getDatum()%></td><td><%=v.getZaehlerstand()%></td></tr><%
+	%><tr><td><%=v.getDatum()%></td><td><%=v.getZaehlerstand()%></td><td><a href="/pcl-web/meter/${model.id_zaehler}/<%=v.getId_verbrauch()%>/remove">L&ouml;schen</a></td></tr><%
 }
 %>
 </table>

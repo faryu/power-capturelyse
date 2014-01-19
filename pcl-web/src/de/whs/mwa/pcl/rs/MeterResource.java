@@ -117,6 +117,26 @@ public class MeterResource {
 
 		return analyse;
 	}
+	
+	@GET
+	@Path("{zid}/{vid}/remove")
+	public void remove(@PathParam("zid") int zid, @PathParam("vid") int vid, @Context HttpServletRequest request)
+	{
+		entity.User user = HomeResource.currentUser(request);
+		Zaehler zaehler = zaehlerVerwaltung.findZaehler(zid);
+		if (zaehler == null || !zaehler.getAdresse().getUser().equals(user))
+			throw new RedirectException("/");
+		for(Verbrauch verbrauch : zaehler.getVerbrauch())
+		{
+			if(verbrauch.getId_verbrauch() == vid)
+			{
+				verbrauchVerwaltung.deleteVerbrauch(verbrauch);
+				break;
+			}
+		}
+		
+		throw new RedirectException("/meter/" + zid);
+	}
 
 	public static SimpleDateFormat dateFormat() {
 		return new SimpleDateFormat("dd.MM.yyyy HH:mm");

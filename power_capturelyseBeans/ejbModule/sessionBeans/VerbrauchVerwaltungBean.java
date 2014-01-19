@@ -41,7 +41,11 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
     
     @Override
 	public void deleteVerbrauch(Verbrauch verbrauch) {
-		em.remove(verbrauch);		
+    	if(verbrauch == null)
+    		return;
+    	verbrauch = em.merge(verbrauch);
+    	verbrauch.getZaehler().getVerbrauch().remove(verbrauch);
+		em.remove(verbrauch);
 	}
  
     
