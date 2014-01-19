@@ -84,6 +84,8 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 	public Double showGesamtVerbrauchImIntervall(int id_zaehler, Date datumVon,Date datumBis) throws ParseException
 		{ 
 		
+		System.out.println("showGesamtVerbrauchImIntervall=======================");
+		
 		Double intervalVerbrauchReturn;
 		
 		datumVon.setHours(00);
@@ -150,7 +152,7 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 		}
 		else
 		{
-    		System.out.println("Intervallgrenzen enthalten keinen Zaehlerstand!");
+    		System.out.println("Angebene Intervallgrenzen sind nicht beide in den Verbrauchsdaten vorhanden.");
     		return null;
 		}	
     		
@@ -209,7 +211,10 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 	@SuppressWarnings("deprecation")
 	public Double showTagesVerbrauchImIntervall(int id_zaehler, Date datumVon,Date datumBis) throws ParseException
 	{	
+		System.out.println("showTagesVerbrauchImIntervall=======================");
 		
+		if(showGesamtVerbrauchImIntervall(id_zaehler, datumVon, datumBis) != null)
+		{
 		Double intervallVerbrauch = showGesamtVerbrauchImIntervall(id_zaehler, datumVon, datumBis);
 		
 		datumVon.setHours(00);
@@ -230,6 +235,9 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 		System.out.println("AVG pro Tag "+avgTagVerbrauch);
 		
 	   return avgTagVerbrauch;
+	   }
+	System.out.println("Angebene Intervallgrenzen sind nicht beide in den Verbrauchsdaten vorhanden.");
+	return null;
 	}
 	
 

@@ -80,7 +80,7 @@ public class SimpleClient {
 //	OutputHelper.output(userverwaltung.findUserAdresse(2));
 
 	String date1 = "2014-01-01 00:00:00";
-	String date2 = "2014-01-19 23:59:59";
+	String date2 = "2014-02-28 23:59:59";
 	SimpleDateFormat format1 = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
 	
 	Date datumVon = (Date) format1.parse(date1);
@@ -97,7 +97,7 @@ public class SimpleClient {
 	
 //	OutputHelper.output(verbrauchsverwaltung.showVerbraeucheAVG(1, datumVon, datumBis));
 	
-	System.out.println(verbrauchsverwaltung.getZaehlerstaendeAuswahl(1,datumVon, datumBis).get(0).getDatum() +" "+ verbrauchsverwaltung.getZaehlerstaendeAuswahl(1,datumVon, datumBis).get(0).getZaehlerstand());
+	//System.out.println(verbrauchsverwaltung.getZaehlerstaendeAuswahl(1,datumVon, datumBis).get(0).getDatum() +" "+ verbrauchsverwaltung.getZaehlerstaendeAuswahl(1,datumVon, datumBis).get(0).getZaehlerstand());
 	
 	System.out.println("Verbrauch im Intervall: " + verbrauchsverwaltung.showGesamtVerbrauchImIntervall(1, datumVon, datumBis));
 	
