@@ -63,10 +63,13 @@ public class UserVerwaltungBean implements UserVerwaltungInterface{
     
     @SuppressWarnings("unchecked")
     @Override
-    public List<Object[]> findUserAdresse(int id_user) {
-    Query query = em.createQuery("SELECT a.ort, a.strasse, a.plz from Adresse a where a.user.id_user = :id_user" );
+    public List<Adresse> findUserAdresse(int id_user) {
+    Query query = em.createQuery("SELECT a from Adresse a where a.user.id_user = :id_user" );
     query.setParameter("id_user", id_user);
-	return query.getResultList();
+    List<Adresse> resultList = (List<Adresse>) query.getResultList();
+       
+    
+	return resultList;
 	
     }
 

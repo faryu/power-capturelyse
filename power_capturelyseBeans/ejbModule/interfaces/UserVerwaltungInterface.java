@@ -17,7 +17,7 @@ public interface UserVerwaltungInterface {
     public User findUser(int id);
     public void updateUser(User user);
 //    public List<String> findUserAdresse(int id_user);
-    public List<Object []> findUserAdresse(int id_user);
+    public List<Adresse> findUserAdresse(int id_user);
     public Adresse findAdresse(int id);   
     public User findUserLoginName(String uname, String password);
 }

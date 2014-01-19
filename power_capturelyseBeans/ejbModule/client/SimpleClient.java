@@ -103,6 +103,9 @@ public class SimpleClient {
 	
 	System.out.println("Tagesverbauch im Intervall: " + verbrauchsverwaltung.showTagesVerbrauchImIntervall(1, datumVon, datumBis));
 	
+	System.out.println(userverwaltung.findUserAdresse(1).get(0).getStrasse());
+
+
 	//System.out.println(wetter.showWetterAVG(46419, datumVon, datumBis));
 		
 	
