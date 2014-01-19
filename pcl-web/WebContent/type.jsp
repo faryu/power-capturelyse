@@ -9,6 +9,7 @@
 <title>Energietypenverwaltung</title>
 </head>
 <body>
+<p><a href="/pcl-web">Startseite</a></p>
 <h3>Aktuell verfügbar:</h3>
 <% 
 EnergietypVerwaltungInterface model = (EnergietypVerwaltungInterface)request.getAttribute("model");

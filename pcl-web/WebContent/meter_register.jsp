@@ -9,6 +9,7 @@
 <title>Neuer Stromzähler</title>
 </head>
 <body>
+<p><a href="/pcl-web/home">Home</a></p>
 	<form method="post" action="/pcl-web/address/${model.aid}/add_meter">
 		Name: <input type="text" name="name" value="${model.name}" />
 		${model.errors.name} <br /> Typ: <select name="type">

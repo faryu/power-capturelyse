@@ -7,6 +7,7 @@
 <title>Login</title>
 </head>
 <body>
+<p><a href="/pcl-web">Startseite</a></p>
 <form method="post" action="/pcl-web/user/login">
         Username: <input type="text" name="uname" value="${model.uname}"/> ${model.errors.uname}
         <br/>

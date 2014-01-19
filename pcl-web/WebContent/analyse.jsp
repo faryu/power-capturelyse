@@ -11,6 +11,7 @@
 <title>Analyse</title>
 </head>
 <body>
+<p><a href="/pcl-web/home">Home</a></p>
 <h2>Zähler</h3>
 <h3>${model.zaehler.zaehlername} (${model.zaehler.energietyp.energietyp} [${model.zaehler.energietyp.einheit}])</h3>
 <p>

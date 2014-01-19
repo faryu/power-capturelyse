@@ -7,6 +7,7 @@
 <title>Energietyp hinzufügen</title>
 </head>
 <body>
+<p><a href="/pcl-web/type">Energietypen</a></p>
 <form method="post" action="/pcl-web/type/new">
         Typ: <input type="text" name="name" value="${model.name}"/> ${model.errors.name}
         <br/>

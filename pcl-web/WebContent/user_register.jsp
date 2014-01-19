@@ -7,6 +7,7 @@
 <title>Register user</title>
 </head>
 <body>
+<p><a href="/pcl-web">Startseite</a></p>
 <form method="post" action="/pcl-web/user/register">
         Username: <input type="text" name="uname" value="${model.uname}"/> ${model.errors.uname}
         <br/>
