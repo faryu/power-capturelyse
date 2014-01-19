@@ -16,10 +16,11 @@ public interface VerbrauchVerwaltungInterface {
     public void updateVerbrauch(Verbrauch verbrauch);
     public void deleteVerbrauch(Verbrauch verbrauch);
 
-    public List<Verbrauch> getVerbraeuche(int id_zaehler);
-    public List<Verbrauch> getVerbraeucheAuswahl(int id_zaehler, Date datumVon, Date datumBis);
+    public List<Verbrauch> getZaehlerstaende(int id_zaehler);
+    public List<Verbrauch> getZaehlerstaendeAuswahl(int id_zaehler, Date datumVon, Date datumBis);
     public Double showGesamtVerbrauchImIntervall(int id_zaehler, Date datumVon,Date datumBis) throws ParseException;
     public Double showTagesVerbrauchImIntervall(int id_zaehler, Date datumVon,Date datumBis) throws ParseException;
+//    public List<Object[]> showVerbraeucheAVG(int id_zaehler, Date datumVon,	Date datumBis);
 
     
 

@@ -79,8 +79,8 @@ public class SimpleClient {
 	// adressverwaltung.addAdresse(adresse);
 //	OutputHelper.output(userverwaltung.findUserAdresse(2));
 
-	String date1 = "2014-02-28 01:05:07";
-	String date2 = "2014-12-31 23:59:59";
+	String date1 = "2014-01-01 00:00:00";
+	String date2 = "2014-01-19 23:59:59";
 	SimpleDateFormat format1 = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
 	
 	Date datumVon = (Date) format1.parse(date1);
@@ -95,14 +95,14 @@ public class SimpleClient {
 	//wetter.showWetterAuswahl(12345, datumVon, datumBis);
 	
 	
+//	OutputHelper.output(verbrauchsverwaltung.showVerbraeucheAVG(1, datumVon, datumBis));
 	
-	System.out.println(verbrauchsverwaltung.showGesamtVerbrauchImIntervall(1, datumVon, datumBis));
+	System.out.println("Verbrauch im Intervall: " + verbrauchsverwaltung.showGesamtVerbrauchImIntervall(2, datumVon, datumBis));
 	
-	System.out.println(verbrauchsverwaltung.showTagesVerbrauchImIntervall(1, datumVon, datumBis));
+	System.out.println("Tagesverbauch im Intervall: " + verbrauchsverwaltung.showTagesVerbrauchImIntervall(2, datumVon, datumBis));
 	
 	//System.out.println(wetter.showWetterAVG(46419, datumVon, datumBis));
-	
-	//System.out.println(verbrauchsverwaltung.showVerbraeucheAVG(1, datumVon, datumBis));
+		
 	
 	//OutputHelper.output(verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis));
 	//energieverwaltung.showEnergietypen();

@@ -37,6 +37,7 @@ public class Verbrauch implements Serializable{
     @Column(nullable=false, precision=14, scale=2)
     private BigDecimal zaehlerstand;    
     @Column(nullable=false)
+    @Temporal(TemporalType.DATE)
     private Date datum;           
     
        
@@ -80,10 +81,11 @@ public class Verbrauch implements Serializable{
         this.zaehlerstand = zaehlerstand;
     }
 
-    @Temporal(TemporalType.DATE)   
+    
     public Date getDatum() {
         return datum;
     }
+    
     
     public void setDatum(Date datum) {
         this.datum = datum;

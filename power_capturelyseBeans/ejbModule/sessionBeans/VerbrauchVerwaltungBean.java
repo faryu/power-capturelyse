@@ -9,13 +9,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-
-
-
-
-
-
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -51,18 +44,26 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 		em.remove(verbrauch);		
 	}
  
+    
+    /**
+     * Gibt die Zaehlerstande fuer einen bestimmten Zaehler zurueck
+     */
     @SuppressWarnings("unchecked")
     @Override
-    public List<Verbrauch> getVerbraeuche(int id_zaehler) {
+    public List<Verbrauch> getZaehlerstaende(int id_zaehler) {
     	Query query = em.createQuery("SELECT v from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler ORDER BY v.datum ASC");
     	query.setParameter("id_zaehler", id_zaehler);
     	List<Verbrauch> resultList = (List<Verbrauch>)query.getResultList();
     	logger.info("******* Anzahl der gefundenen getVerbraeuche(): " + resultList.size()+" *******");
     	return resultList;
     }
-
+    
+    /**
+     * Gibt die Zaehlerstaende fuer einen bestimmten Zaehler
+     * innerhalb eines bestimmten Zeitraums zurueck
+     */
 	@Override	
-	public List<Verbrauch> getVerbraeucheAuswahl(int id_zaehler, Date datumVon, Date datumBis) {		
+	public List<Verbrauch> getZaehlerstaendeAuswahl(int id_zaehler, Date datumVon, Date datumBis) {		
 		Query query = em.createQuery("SELECT v from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler " +  
 					"and (v.datum between :datumVon and :datumBis ) ORDER BY v.datum ASC");
 		query.setParameter("id_zaehler",id_zaehler );
@@ -159,24 +160,52 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 	
 	
 	
-	
-	//K�se ermittelt keinen Mittelwert pro Tag
-	/*public Double showVerbraeucheAVG(int id_zaehler, Date datumVon,
-		Date datumBis) {
-	    Query query = em.createQuery("SELECT AVG(v.zaehlerstand) from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler " +  
-			"and (v.datum between :datumVon and :datumBis )");
-	    query.setParameter("id_zaehler",id_zaehler );
-	    query.setParameter("datumVon",datumVon );
-	    query.setParameter("datumBis",datumBis );
+	/**
+	 * Gibt den durchschnittlichen Verbrauch eines bestimmmten Zaehlers
+	 * innerhalb eines bestimmten Zeitraumes zurueck
+	 * @param int id_zaehler, Date datumVon, Date datumBis
+	 * @return BigDecimal
+	 */
+	//K�se ermittelt keinen Mittelwert pro Tag	
+//	public BigDecimal showVerbraeucheAVG(int id_zaehler, Date datumVon, Date datumBis) {
+//	    Query query = em.createQuery("SELECT abs((Max(v.zaehlerstand) - Min(v.zaehlerstand)) /( Datediff(:datumVon, :datumBis)))as avg from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler " +  
+//			"and (v.datum between :datumVon and :datumBis )");
+//	    query.setParameter("id_zaehler",id_zaehler );
+//	    query.setParameter("datumVon",datumVon );
+//	    query.setParameter("datumBis",datumBis );
+//		
+//	    BigDecimal wert = (BigDecimal) query.getSingleResult();
+//	  
+//	    // TODO Auto-generated method stub
+//	    logger.info("******* AVG Verbrauch für Zaehler: " + id_zaehler + " innerhalb " + datumVon + " und " + datumBis + "-> " + wert + " *******");
+//	    return wert;
+//		}
 		
-	    double wert = (Double) query.getSingleResult();
-	  
-	    // TODO Auto-generated method stub
-	    logger.info("******* AVG Verbrauch für PLZ: " + id_zaehler + "-> " + wert + " *******");
-	    return wert;
-		}
-		*/
+	/**
+	 * Gibt den durchschnittlichen Verbrauch und den Gesamtverbrauch
+	 * als eine Liste von Object[]zurueck
+	 */
+	
+//	public List<Object[]>showVerbraeucheAVG(int id_zaehler, Date datumVon, Date datumBis) {
+//	    Object[] arr;
+//	    Query query = em.createQuery("SELECT abs((Max(v.zaehlerstand) - Min(v.zaehlerstand)) /( Datediff(:datumVon, :datumBis)))as avg, (Max(v.zaehlerstand)-Min(v.zaehlerstand)) as gesamt from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler " +  
+//			"and (v.datum between :datumVon and :datumBis )");
+//	    query.setParameter("id_zaehler",id_zaehler );
+//	    query.setParameter("datumVon",datumVon );
+//	    query.setParameter("datumBis",datumBis );
+//	    @SuppressWarnings("unchecked")
+//	    List<Object[]> l = query.getResultList();	    
+//	    for(Object object: l ){
+//		arr = (Object[]) object;
+//		System.out.println("AVG: " + arr[0]);
+//		System.out.println("Verbrauch gesamt:" + arr[1]);		
+//	    }
+//	    // TODO Auto-generated method stub
+//	    logger.info("******* AVG Verbrauch für Zaehler: " + id_zaehler + " innerhalb " + datumVon + " und " + datumBis + "->  *******");
+//	    return l;
+//		}
 
+	
 	@SuppressWarnings("deprecation")
 	public Double showTagesVerbrauchImIntervall(int id_zaehler, Date datumVon,Date datumBis) throws ParseException
 	{	
