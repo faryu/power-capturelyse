@@ -86,15 +86,15 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 		
 		System.out.println("showGesamtVerbrauchImIntervall=======================");
 		
-		Double intervalVerbrauchReturn;
-		
-		datumVon.setHours(00);
-		datumVon.setMinutes(00);
-		datumVon.setSeconds(00);
-		
-		datumBis.setHours(23);
-		datumBis.setMinutes(59);
-		datumBis.setSeconds(59);
+//		Double intervalVerbrauchReturn;
+//		
+//		datumVon.setHours(00);
+//		datumVon.setMinutes(00);
+//		datumVon.setSeconds(00);
+//		
+//		datumBis.setHours(23);
+//		datumBis.setMinutes(59);
+//		datumBis.setSeconds(59);
 			
 		Query query = em.createQuery("SELECT v from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler " +  
 		"and (v.datum between :datumVon and :datumBis ) ORDER BY v.datum ASC");
@@ -104,59 +104,70 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
   
 		@SuppressWarnings("unchecked")
 		List<Verbrauch> resultList = (List<Verbrauch>)query.getResultList();
-    					
+    	if(resultList == null || resultList.isEmpty())
+    		return 0.0;
+    	return resultList.get(resultList.size() - 1).getZaehlerstand().doubleValue() - resultList.get(0).getZaehlerstand().doubleValue();
 		// 
 		
 		
-		String strvonDatum = resultList.get(0).getDatum().toString();
-		String strbisDatum = resultList.get(resultList.size()-1).getDatum().toString();
-				
-		SimpleDateFormat format1 = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
-				
-		Date sqlvonDatum = (Date) format1.parse(strvonDatum);
-		Date sqlbisDatum = (Date) format1.parse(strbisDatum);
-		
-		sqlvonDatum.setHours(00);
-		sqlvonDatum.setMinutes(00);
-		sqlvonDatum.setSeconds(00);
-		
-		sqlbisDatum.setHours(23);
-		sqlbisDatum.setMinutes(59);
-		sqlbisDatum.setSeconds(59);
-		
-	
-		
-		if((sqlvonDatum.compareTo(datumVon)==0) && (sqlbisDatum.compareTo(datumBis)==0))
-		{
-			System.out.println("Intervall ist vorhanden");
-			
-			Long zeitvonDatum = resultList.get(0).getDatum().getTime();
-			Long zeitbisDatum = resultList.get(1).getDatum().getTime();
-			
-			Long intervallTagAbstand = (zeitbisDatum - zeitvonDatum)/1000/60/60/24;
-			System.out.println("Tage im Intervall: "+intervallTagAbstand);
-			
-			BigDecimal zaehlerstandvonDatum = resultList.get(0).getZaehlerstand();
-			BigDecimal zaehlerstandbisDatum = resultList.get(1).getZaehlerstand();
-			
-			BigDecimal intervallVerbrauch = zaehlerstandbisDatum.subtract(zaehlerstandvonDatum);
-			
-			intervalVerbrauchReturn =intervallVerbrauch.doubleValue();
-			
-			System.out.println("Verbrauch im Intervall: "+intervalVerbrauchReturn);
-			
-	//		verbrauchProTag= intervallVerbrauch.doubleValue() / intervallTagAbstand.doubleValue();
-			
-		//	System.out.println( "Durchschnittsverbrauch pro Tag "+ verbrauchProTag);
-			
-		}
-		else
-		{
-    		System.out.println("Angebene Intervallgrenzen sind nicht beide in den Verbrauchsdaten vorhanden.");
-    		return null;
-		}	
-    		
-    return intervalVerbrauchReturn;
+		// String strvonDatum = resultList.get(0).getDatum().toString();
+		// String strbisDatum =
+		// resultList.get(resultList.size()-1).getDatum().toString();
+		//
+		// SimpleDateFormat format1 = new
+		// SimpleDateFormat("yyy-MM-dd HH:mm:ss");
+		//
+		// Date sqlvonDatum = (Date) format1.parse(strvonDatum);
+		// Date sqlbisDatum = (Date) format1.parse(strbisDatum);
+		//
+		// sqlvonDatum.setHours(00);
+		// sqlvonDatum.setMinutes(00);
+		// sqlvonDatum.setSeconds(00);
+		//
+		// sqlbisDatum.setHours(23);
+		// sqlbisDatum.setMinutes(59);
+		// sqlbisDatum.setSeconds(59);
+		//
+		//
+		//
+		// if((sqlvonDatum.compareTo(datumVon)==0) &&
+		// (sqlbisDatum.compareTo(datumBis)==0))
+		// {
+		// System.out.println("Intervall ist vorhanden");
+		//
+		// Long zeitvonDatum = resultList.get(0).getDatum().getTime();
+		// Long zeitbisDatum = resultList.get(1).getDatum().getTime();
+		//
+		// Long intervallTagAbstand = (zeitbisDatum -
+		// zeitvonDatum)/1000/60/60/24;
+		// System.out.println("Tage im Intervall: "+intervallTagAbstand);
+		//
+		// BigDecimal zaehlerstandvonDatum =
+		// resultList.get(0).getZaehlerstand();
+		// BigDecimal zaehlerstandbisDatum =
+		// resultList.get(1).getZaehlerstand();
+		//
+		// BigDecimal intervallVerbrauch =
+		// zaehlerstandbisDatum.subtract(zaehlerstandvonDatum);
+		//
+		// intervalVerbrauchReturn =intervallVerbrauch.doubleValue();
+		//
+		// System.out.println("Verbrauch im Intervall: "+intervalVerbrauchReturn);
+		//
+		// // verbrauchProTag= intervallVerbrauch.doubleValue() /
+		// intervallTagAbstand.doubleValue();
+		//
+		// // System.out.println( "Durchschnittsverbrauch pro Tag "+
+		// verbrauchProTag);
+		//
+		// }
+		// else
+		// {
+		// System.out.println("Angebene Intervallgrenzen sind nicht beide in den Verbrauchsdaten vorhanden.");
+		// return null;
+		// }
+		//
+		// return intervalVerbrauchReturn;
 	}
 	
 	
