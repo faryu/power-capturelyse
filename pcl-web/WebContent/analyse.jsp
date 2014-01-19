@@ -25,7 +25,10 @@
 Analyse model = (Analyse)request.getAttribute("model");
 if(model != null && model.getVerbraeuche() != null && !model.getVerbraeuche().isEmpty())
 {
-	%><p>Gesamtverbrauch im Intervall: ${model.total}</p>
+	%><p>
+	Gesamtverbrauch im Intervall: ${model.total} ${model.zaehler.energietyp.einheit}<br/>
+	Tagesverbrauch im Intervall: ${model.avg} ${model.zaehler.energietyp.einheit}
+	</p>
 	<table><tr><th>Datum</th><th>Zählerstand</th></tr>
 	<%
 	for(Verbrauch v : model.getVerbraeuche())
