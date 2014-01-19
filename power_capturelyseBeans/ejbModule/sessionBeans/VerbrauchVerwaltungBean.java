@@ -54,7 +54,7 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
     	Query query = em.createQuery("SELECT v from Verbrauch v where v.zaehler.id_zaehler = :id_zaehler ORDER BY v.datum ASC");
     	query.setParameter("id_zaehler", id_zaehler);
     	List<Verbrauch> resultList = (List<Verbrauch>)query.getResultList();
-    	logger.info("******* Anzahl der gefundenen getVerbraeuche(): " + resultList.size()+" *******");
+    	logger.info("******* Anzahl der gefundenen getZaehlerstaende(): " + resultList.size()+" *******");
     	return resultList;
     }
     
@@ -74,7 +74,7 @@ public class VerbrauchVerwaltungBean implements VerbrauchVerwaltungInterface{
 		
 					
 		// TODO Auto-generated method stub
-		logger.info("********* Anzahl der gefundenen getVerbraeucheAuswahl(): " + resultList.size()+ " *******");
+		logger.info("********* Anzahl der gefundenen getZaehlerstaendeAuswahl(): " + resultList.size()+ " *******");
 		return resultList;
 		}
 

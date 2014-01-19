@@ -97,9 +97,11 @@ public class SimpleClient {
 	
 //	OutputHelper.output(verbrauchsverwaltung.showVerbraeucheAVG(1, datumVon, datumBis));
 	
-	System.out.println("Verbrauch im Intervall: " + verbrauchsverwaltung.showGesamtVerbrauchImIntervall(2, datumVon, datumBis));
+	System.out.println(verbrauchsverwaltung.getZaehlerstaendeAuswahl(1,datumVon, datumBis).get(0).getDatum() +" "+ verbrauchsverwaltung.getZaehlerstaendeAuswahl(1,datumVon, datumBis).get(0).getZaehlerstand());
 	
-	System.out.println("Tagesverbauch im Intervall: " + verbrauchsverwaltung.showTagesVerbrauchImIntervall(2, datumVon, datumBis));
+	System.out.println("Verbrauch im Intervall: " + verbrauchsverwaltung.showGesamtVerbrauchImIntervall(1, datumVon, datumBis));
+	
+	System.out.println("Tagesverbauch im Intervall: " + verbrauchsverwaltung.showTagesVerbrauchImIntervall(1, datumVon, datumBis));
 	
 	//System.out.println(wetter.showWetterAVG(46419, datumVon, datumBis));
 		
@@ -109,11 +111,7 @@ public class SimpleClient {
 	
 	
 	//BigDecimal innn = analyse.mittlererVerbrauch(verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis));
-	//System.out.println(verbrauchsverwaltung.getVerbraeuche(1).get(0).getDatum() + " " + verbrauchsverwaltung.getVerbraeuche(1).get(0).getZaehlerstand());
-	//System.out.println(verbrauchsverwaltung.getVerbraeuche(1).get(1).getDatum() + " " + verbrauchsverwaltung.getVerbraeuche(1).get(1).getZaehlerstand());
-	//System.out.println(verbrauchsverwaltung.getVerbraeuche(1).get(2).getDatum() + " " + verbrauchsverwaltung.getVerbraeuche(1).get(2).getZaehlerstand());
-
-	//System.out.println(verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis).get(0).getDatum() +" "+ verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis).get(0).getZaehlerstand());
+	
 	//System.out.println(verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis).get(1).getDatum() +" "+ verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis).get(1).getZaehlerstand());
 	//System.out.println(verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis).get(2).getDatum() +" "+ verbrauchsverwaltung.getVerbraeucheAuswahl(1,datumVon, datumBis).get(2).getZaehlerstand());
 
