@@ -11,6 +11,6 @@ public interface ClientSitzungRemoteInterface {
 	public boolean identityCheck(String loginname, String password);
 	
 	public String whoIam();
-	
+	public void refresh();
 	
 }

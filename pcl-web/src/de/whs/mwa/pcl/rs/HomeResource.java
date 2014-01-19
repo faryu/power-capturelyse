@@ -32,6 +32,7 @@ public class HomeResource {
 		ClientSitzungRemoteInterface sessionBean = (ClientSitzungRemoteInterface) session.getAttribute("pcl-session");
 		if(sessionBean == null)
 			throw new RedirectException("/user/login");
+		sessionBean.refresh();
 		return sessionBean.getUser();
 	}
 }

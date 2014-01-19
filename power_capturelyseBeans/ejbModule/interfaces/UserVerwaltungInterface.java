@@ -20,4 +20,5 @@ public interface UserVerwaltungInterface {
     public List<Adresse> findUserAdresse(int id_user);
     public Adresse findAdresse(int id);   
     public User findUserLoginName(String uname, String password);
+    public User refresh(User user);
 }

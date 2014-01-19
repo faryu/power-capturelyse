@@ -61,9 +61,7 @@ public class AddressResource {
 			adresse = adressverwaltung.addAdresse(adresse);
 			
 			
-			adressverwaltung.updateAdresse(adresse);
-//			throw new RedirectException("/address/" + Integer.toString(adresse.getId_adresse()));
-			throw new RedirectException("/home/");
+			throw new RedirectException("/address/" + Integer.toString(adresse.getId_adresse()));
 		}
 		return address;
 	}

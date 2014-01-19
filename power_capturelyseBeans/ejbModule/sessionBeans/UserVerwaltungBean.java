@@ -90,6 +90,17 @@ public class UserVerwaltungBean implements UserVerwaltungInterface{
 		{
 			return findUser(result.get(0));
 		}
+	}
+
+	@Override
+	public User refresh(User user) {
+		if(user != null)
+		{
+			user = em.merge(user);
+			em.refresh(user);
+			return user;
+		}
+		return null;
 	} 
 
 }
