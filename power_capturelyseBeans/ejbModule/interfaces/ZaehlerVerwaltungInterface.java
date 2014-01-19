@@ -1,7 +1,10 @@
 package interfaces;
 
+import javax.ejb.Remote;
+
 import entity.Zaehler;
 
+@Remote
 public interface ZaehlerVerwaltungInterface {
     
     public Zaehler createZaehler(Zaehler zaehler);

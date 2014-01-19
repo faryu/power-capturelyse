@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
@@ -102,8 +103,17 @@ public class MeterResource {
 			throw new RedirectException("/");
 
 		analyse.setZaehler(zaehler);
-		
-		//todo: Ausgabe
+
+		try {
+			Date from = dateFormat().parse(analyse.getFrom());
+			Date to = dateFormat().parse(analyse.getTo());
+			analyse.setVerbraeuche(verbrauchVerwaltung.getZaehlerstaendeAuswahl(id, from, to));
+			analyse.setAvg(verbrauchVerwaltung.showTagesVerbrauchImIntervall(id, from, to));
+			analyse.setTotal(verbrauchVerwaltung.showGesamtVerbrauchImIntervall(id, from, to));
+			
+		} catch (ParseException e) {
+
+		}
 
 		return analyse;
 	}

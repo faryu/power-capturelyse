@@ -1,3 +1,5 @@
+<%@page import="entity.Verbrauch"%>
+<%@page import="de.whs.mwa.pcl.rs.Analyse"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -19,6 +21,19 @@
  <input type="text" name="to" value="${model.to}"/>
 </form>
 </p>
-
+<%
+Analyse model = (Analyse)request.getAttribute("model");
+if(model != null && model.getVerbraeuche() != null && !model.getVerbraeuche().isEmpty())
+{
+	%><p>Gesamtverbrauch im Intervall: ${model.total}</p>
+	<table><tr><th>Datum</th><th>Zählerstand</th></tr>
+	<%
+	for(Verbrauch v : model.getVerbraeuche())
+	{
+		%><tr><td><%=v.getDatum()%></td><td><%=v.getZaehlerstand()%></td></tr><%
+	}
+	%></table><%
+}
+%>
 </body>
 </html>

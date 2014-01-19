@@ -1,7 +1,10 @@
 package de.whs.mwa.pcl.rs;
 
+import java.util.List;
+
 import javax.ws.rs.FormParam;
 
+import entity.Verbrauch;
 import entity.Zaehler;
 
 public class Analyse {
@@ -12,7 +15,28 @@ public class Analyse {
 	private String to;
 	
 	private Zaehler zaehler;
+	private List<Verbrauch> verbraeuche;
+	private double avg;
+	private double total;
 	
+	public double getTotal() {
+		return total;
+	}
+	public void setTotal(double total) {
+		this.total = total;
+	}
+	public double getAvg() {
+		return avg;
+	}
+	public void setAvg(double avg) {
+		this.avg = avg;
+	}
+	public List<Verbrauch> getVerbraeuche() {
+		return verbraeuche;
+	}
+	public void setVerbraeuche(List<Verbrauch> verbraeuche) {
+		this.verbraeuche = verbraeuche;
+	}
 	public String getFrom() {
 		return from;
 	}
